@@ -1,0 +1,10 @@
+_ReSharper.*
+**.ReSharper
+bin
+obj
+**.user
+**.suo
+TestResults
+_UpgradeReport_Files
+UpgradeLog*.XML
+FactivaGateway.config
