@@ -143,6 +143,10 @@ footer {
 }
 
 
+#search, #navigation {
+    display: inline-block;
+}
+
 /* login
 ----------------------------------------------------------*/
 #login {

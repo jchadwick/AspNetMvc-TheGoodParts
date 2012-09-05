@@ -15,22 +15,18 @@
                     <p class="site-title">@Html.ActionLink("MVC Auctions", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
                     <section id="search">
                         @using(Html.BeginForm("Search", "Auctions", FormMethod.Get)) {
                             <input name="query" type="search" autocomplete="true" />
                             <input type="submit" value="Search" />
                         }
                     </section>
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
+                    <section id="navigation">
+                        @Html.Partial("_Navigation")
                     </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </header>

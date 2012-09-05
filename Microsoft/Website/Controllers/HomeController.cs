@@ -6,10 +6,11 @@ namespace Website.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AuctionContext _db = new AuctionContext();
+
         public ActionResult Index()
         {
-            var db = new AuctionContext();
-            ViewBag.FeaturedAuctions = db.Auctions.Where(x => x.IsFeatured);
+            ViewBag.FeaturedAuctions = _db.Auctions.Where(x => x.IsFeatured);
 
             return View("Homepage");
         }
