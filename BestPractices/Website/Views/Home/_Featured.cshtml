@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Website.Models.AuctionViewModel>
+
+<section id="featured-auctions">
+    <ul class="auctions">
+        @foreach(var auction in Model)
+        {
+            <li class="auction" data-id="@auction.Id">
+                <img src="@auction.ThumbnailUrl" />
+                <span class="title">@auction.Title</span>
+                <span class="price">@auction.CurrentPriceDisplay</span>
+            </li>
+        }
+    </ul>
+</section>

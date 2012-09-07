@@ -1,0 +1,17 @@
+﻿@model Website.Models.AuctionsViewModel
+
+@{
+    ViewBag.Title = "Auctions";
+}
+
+
+<div class="auctions">
+@foreach (var auction in Model.Auctions)
+{
+    <div class="auction" data-id="@auction.Id">
+        <img src="@auction.ThumbnailUrl" />
+        <span class="title">@auction.Title</span>
+        <span class="price">@auction.CurrentPriceDisplay</span>
+    </div>
+}
+</div>
