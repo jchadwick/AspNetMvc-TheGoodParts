@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Common.Util;
+using Website.ActionFilters;
 
 namespace Website
 {
@@ -12,6 +13,7 @@ namespace Website
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new CategoriesActionFilter());
             filters.Add(new HandleErrorAttribute());
         }
     }

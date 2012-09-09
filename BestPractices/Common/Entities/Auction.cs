@@ -1,8 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Common.Entities;
 
-namespace Website.Models
+namespace Common
 {
     public class Auction
     {
@@ -60,13 +59,11 @@ namespace Website.Models
         [Required]
         [Display(Name ="Start Time")]
         [DataType(DataType.DateTime)]
-        [CustomValidation(typeof(DateValidator), "AfterNow")]
         public DateTime StartTime { get; set; }
 
         [Required]
         [Display(Name ="End Time")]
         [DataType(DataType.DateTime)]
-        [CustomValidation(typeof(DateValidator), "AfterNow")]
         public DateTime EndTime { get; set; }
 
         [Display(Name = "Featured Auction?")]

@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using System.Linq;
 
-namespace Website.Models
+namespace Common.DataAccess
 {
     public class DbContextRepository : IRepository
     {

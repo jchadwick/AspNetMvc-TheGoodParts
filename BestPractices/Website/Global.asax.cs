@@ -1,12 +1,8 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Web.Compilation;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Website.Models;
-using TinyIoC;
+using Website.App_Start;
 
 namespace Website
 {
@@ -19,22 +15,7 @@ namespace Website
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-//            InitializeDependencyResolver();
-        }
-
-        private static void InitializeDependencyResolver()
-        {
-            var container = TinyIoCContainer.Current;
-
-            container.AutoRegister();
-
-            container.Register<IRepository, DbContextRepository>().AsPerRequestSingleton();
-
-            DependencyResolver.SetResolver(
-                container.Resolve,
-                container.ResolveAll
-            );
+            DataContextConfig.InitializeDataContext();
         }
     }
 }

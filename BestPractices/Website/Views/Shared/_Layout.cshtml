@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title | MVC Auctions</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/global")
 </head>
@@ -11,13 +11,15 @@
     @Html.Partial("_Navigation")
 
     <div class="container">
+        @if(TempData["SuccessMessage"] != null) {<div class="alert-success">@TempData["SuccessMessage"]</div>}
+        @if(TempData["ErrorMessage"] != null) {<div class="alert-error">@TempData["ErrorMessage"]</div>}
+
         @RenderBody()
 
         <hr />
         <footer>
-            <p>&copy; Company 2012</p>
+            <p>&copy; MVC Auctions @DateTime.Now.Year</p>
         </footer>
-
     </div>
 
     @RenderSection("scripts", required: false)

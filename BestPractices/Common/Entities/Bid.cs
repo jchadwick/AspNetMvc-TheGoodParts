@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Website.Models
+namespace Common
 {
     public class Bid
     {

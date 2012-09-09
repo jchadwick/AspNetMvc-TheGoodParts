@@ -1,4 +1,4 @@
-﻿namespace Common.Entities
+﻿namespace Common
 {
     public class UserProfile
     {

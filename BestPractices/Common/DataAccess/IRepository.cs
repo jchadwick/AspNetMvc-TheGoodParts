@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Website.Models
+namespace Common.DataAccess
 {
     public interface IRepository
     {

@@ -4,14 +4,24 @@
     ViewBag.Title = "Auctions";
 }
 
+<table class="auctions table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Current Price</th>
+        </tr>
+    </thead>
 
-<div class="auctions">
-@foreach (var auction in Model.Auctions)
-{
-    <div class="auction" data-id="@auction.Id">
-        <img src="@auction.ThumbnailUrl" />
-        <span class="title">@auction.Title</span>
-        <span class="price">@auction.CurrentPriceDisplay</span>
-    </div>
-}
-</div>
+    @foreach (var auction in Model.Auctions)
+    {
+        <tr class="auction" data-id="@auction.Id">
+            <td class="title">
+                <img class="img-polaroid" src="@auction.ThumbnailUrl" />
+                <span class="title">@auction.Title</span>
+            </td>
+            <td>
+                <span class="price">@auction.CurrentPriceDisplay</span>
+            </td>
+        </tr>
+    }
+</table>
