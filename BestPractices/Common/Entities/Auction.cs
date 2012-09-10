@@ -21,8 +21,10 @@ namespace Common
             set { _categoryId = value; }
         }
         private long? _categoryId;
-
         public virtual Category Category { get; set; }
+
+        public virtual long? SellerId { get; set; }
+        public virtual UserProfile Seller { get; set; }
 
         public virtual long? TopBidderId { get; set; }
         public virtual UserProfile TopBidder { get; set; }
@@ -34,6 +36,8 @@ namespace Common
         
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        public ItemCondition Condition { get; set; }
         
         [Display(Name ="Image URL")]
         [DataType(DataType.ImageUrl)]
@@ -73,5 +77,12 @@ namespace Common
         {
             Created = DateTime.Now;
         }
+    }
+
+    public enum ItemCondition
+    {
+        Used,
+        New,
+        Other,
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Common;
@@ -49,6 +50,28 @@ namespace Website.Controllers
                 };
 
             return View("Auctions", viewModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var auction = _db.Auctions.Find(id);
+
+            if (auction == null)
+                return HttpNotFound("Auction not found");
+
+            var viewModel = Mapper.DynamicMap<AuctionViewModel>(auction);
+            
+            return View("Details", viewModel);
+        }
+
+        public ActionResult History(int id)
+        {
+            return View("History");
+        }
+
+        public ActionResult Seller(string id)
+        {
+            return View("Seller");
         }
     }
 }

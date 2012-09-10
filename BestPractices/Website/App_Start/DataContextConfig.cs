@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using Common;
 using Common.DataAccess;
-using Website.Models;
 
 namespace Website.App_Start
 {
@@ -17,6 +16,13 @@ namespace Website.App_Start
 //            : DropCreateDatabaseIfModelChanges<AuctionContext>
             : DropCreateDatabaseAlways<AuctionContext>
         {
+            private readonly Random _random;
+
+            public AuctionContextInitializer()
+            {
+                _random = new Random();
+            }
+
             protected override void Seed(AuctionContext context)
             {
                 var collectibles = new Category { Name = "Collectibles" };
@@ -30,43 +36,48 @@ namespace Website.App_Start
                 context.Categories.Add(toys);
                 context.SaveChanges();
 
-                context.Auctions.Add(new Auction
+                AddAuction(context, new Auction
                                          {
                                              IsFeatured = true,
                                              Category = electronics,
                                              Title = "Apple MacBook Pro 13\"",
                                              Description = "The Apple MacBook Pro with a 13\" display",
-                                             StartingPrice = 200,
-                                             StartTime = DateTime.Now,
-                                             EndTime = DateTime.Now.AddDays(7),
                                              ImageUrl = "/content/auction-images/mbp.jpg",
                                              ThumbnailUrl = "/content/auction-images/mbp_thumb.jpg",
                                          });
-                context.Auctions.Add(new Auction
+                AddAuction(context, new Auction
                                          {
                                              IsFeatured = true,
                                              Category = electronics,
                                              Title = "Apple iPad 3",
                                              Description = "The third generation Apple iPad",
-                                             StartingPrice = 50,
-                                             StartTime = DateTime.Now,
-                                             EndTime = DateTime.Now.AddDays(7),
                                              ImageUrl = "/content/auction-images/ipad.jpg",
                                              ThumbnailUrl = "/content/auction-images/ipad_thumb.jpg",
                                          });
-                context.Auctions.Add(new Auction
+                AddAuction(context, new Auction
                                          {
                                              IsFeatured = true,
                                              Category = electronics,
                                              Title = "Barnes & Noble Nook eReader",
                                              Description = "The Barnes & Noble Nook eReader",
-                                             StartingPrice = 100,
-                                             StartTime = DateTime.Now,
-                                             EndTime = DateTime.Now.AddDays(7),
                                              ImageUrl = "/content/auction-images/nook.jpg",
                                              ThumbnailUrl = "/content/auction-images/nook_thumb.jpg",
                                          });
                 context.SaveChanges();
+            }
+
+            private void AddAuction(AuctionContext context, Auction auction)
+            {
+                auction.StartingPrice = _random.Next(1, 200);
+
+                auction.StartTime = DateTime.Now
+                    .AddDays(_random.Next(-4, 0))
+                    .AddHours(_random.Next(0, 23))
+                    .AddMinutes(_random.Next(0, 59));
+
+                auction.EndTime = auction.StartTime.AddDays(_random.Next(4, 7));
+
+                context.Auctions.Add(auction);
             }
         }
     }

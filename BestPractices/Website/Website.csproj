@@ -175,6 +175,9 @@
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\_Featured.cshtml" />
     <Content Include="Views\Auctions\Auctions.cshtml" />
+    <Content Include="Views\Auctions\Details.cshtml" />
+    <Content Include="Views\Auctions\History.cshtml" />
+    <Content Include="Views\Auctions\Seller.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
