@@ -9,7 +9,7 @@ namespace Website.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var db = new AuctionContext();
+            var db = new DataContext();
             var categories = db.Categories.ToArray();
             filterContext.Controller.ViewBag.Categories = categories;
         }

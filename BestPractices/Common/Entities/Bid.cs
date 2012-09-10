@@ -10,9 +10,11 @@ namespace Common
 
         [Required]
         public long AuctionId { get; set; }
+        public virtual Auction Auction { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
+        public virtual UserProfile User { get; set; }
 
         [Required]
         [Display(Name ="Bid Amount")]

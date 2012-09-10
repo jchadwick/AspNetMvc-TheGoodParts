@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using Common;
 
 namespace Website.Models
@@ -30,6 +29,11 @@ namespace Website.Models
 
         public long SellerId { get; set; }
         public string SellerUsername { get; set; }
+        public int SellerFeebackPercentage { get; set; }
+        public string SellerFeebackPercentageDisplay
+        {
+            get { return SellerFeebackPercentage + "%"; }
+        }
 
         public long? TopBidderId { get; set; }
         public string TopBidderUsername { get; set; }

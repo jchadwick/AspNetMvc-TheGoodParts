@@ -10,7 +10,7 @@ namespace Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        private readonly AuctionContext _db = new AuctionContext();
+        private readonly DataContext _db = new DataContext();
 
         public ActionResult Categories(string id)
         {

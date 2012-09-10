@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common
@@ -73,9 +74,22 @@ namespace Common
         [Display(Name = "Featured Auction?")]
         public bool IsFeatured { get; set; }
 
+        public virtual List<Bid> Bids { get; private set; }
+
         public Auction()
         {
             Created = DateTime.Now;
+            Bids = new List<Bid>();
+        }
+
+        public void PlaceBid(long userId, decimal amount)
+        {
+            if (CurrentPrice != null && amount <= CurrentPrice)
+                throw new ApplicationException("Bid amount must exceed current price");
+
+            TopBidderId = userId;
+            CurrentPrice = amount;
+            Bids.Add(new Bid { AuctionId = Id, UserId = userId, BidAmount = amount });
         }
     }
 

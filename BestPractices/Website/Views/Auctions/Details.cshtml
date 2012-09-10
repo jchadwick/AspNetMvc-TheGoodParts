@@ -4,32 +4,59 @@
 }
 
 <style>
-    .auction-details p {
+    #auction-info {
+        margin-bottom: 20px;
+    }
+
+    #auction-title {
+        border-bottom: 1px solid #ccc;
+    }
+
+    #images {
+        padding-top: 20px;
+    }
+
+    #auction-details p {
         margin: 0;
     }
-    .row-fluid .auction-details [class*="span"] {
+
+    #auction-details [class*="span"] {
         min-height: 24px;
     }
 
-    .auction-details label {
+    #auction-details label {
         text-align: right;
         padding-right: 5px;
+    }
+
+    #bid {
+        margin-top: 40px;
+    }
+
+    .actions {
+        list-style: none;
+        margin: 0 10px;
+    }
+        .actions .action {
+            line-height: 30px;
+        }
+
+    #description {
     }
 </style>
 
 
-<div class="auction-info row-fluid">
+<div id="auction-info" class="row-fluid">
     
-    <div class="span4">
-        <p>&nbsp;</p>
+    <div id="images" class="span4">
         <img class="img-polaroid" src="@Model.ImageUrl" />
     </div>
     
     <div class="span8">
         
-        <h3 class="title">@Model.Title</h3>
+        <h3 id="auction-title">@Model.Title</h3>
         
-        <div class="auction-details row-fluid">
+        <div id="auction-details" class="row-fluid">
             
             <div class="span8">
                 <p class="clearfix">
@@ -43,7 +70,13 @@
                     <small class="muted">(@Model.EndTime)</small>
                 </p>
             
-                <div class="well well-small">
+                <p class="clearfix">
+                    <label class="span3 muted">Seller:</label>
+                    <span>@Html.ActionLink(Model.SellerUsername ?? " ", "Seller", "Auctions", new { id = Model.Id })</span>
+                    <small class="seller-feedback muted">(@Model.SellerFeebackPercentageDisplay positive feedback)</small>
+                </p>
+
+                <div id="bid" class="well well-small">
                     <p class="clearfix">
                         <label class="span3 muted">
                             @(Model.HasBids ? "Current" : "Starting") Bid:
@@ -55,10 +88,10 @@
 
                     @using(Html.BeginForm("Bid", "Auctions", FormMethod.Post)) {
                     <p class="clearfix">
-                        <label class="span3 muted">&nbsp;</label>
-                        <span class="input-prepend span5">
+                        <label class="span2 muted">&nbsp;</label>
+                        <span class="input-prepend span4">
                             <span class="add-on">$</span>
-                            <input name="amount" type="text" class="input-small" value="@Model.MinimumBidDisplay">
+                            <input name="amount" type="text" required="true" class="input-mini" placeholder="@Model.MinimumBidDisplay">
                         </span>
                         <input type="submit" value="Place Bid" class="btn btn-primary"/>
                     </p>
@@ -66,9 +99,12 @@
                 </div>
             </div>
 
-            <div class="well  well-small span4">
-                <h5>Seller Information</h5>
-                @Html.ActionLink(Model.SellerUsername ?? " ", "Seller", "Auctions", new { id = Model.Id })
+            <div class="well well-small span4">
+                <ul class="actions">
+                    <li class="action"><a href="#"><i class="icon-plus-sign"></i> Add to Watch List</a></li>
+                    <li class="action"><a href="#"><i class="icon-user"></i> Save seller</a></li>
+                    <li class="action"><a href="#"><i class="icon-exclamation-sign"></i> Report item</a></li>
+                </ul>
             </div>
 
         </div>
@@ -78,8 +114,12 @@
 </div>
 
 <div class="row-fluid">
-    <h4>Description</h4>
-    <section class="description">
+    <ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#"><strong>Description</strong></a>
+    </li>
+    </ul>
+    <section id="description">
         @Model.Description
     </section>
 </div>
