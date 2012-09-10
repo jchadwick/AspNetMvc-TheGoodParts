@@ -7,9 +7,10 @@
 <table class="auctions table table-hover table-condensed">
     <thead>
         <tr>
+            <th class="span2"></th>
             <th></th>
-            <th>Current Price</th>
-            <th>Ends In</th>
+            <th class="span2">Current Price</th>
+            <th class="span3">Ends In</th>
         </tr>
     </thead>
 
@@ -18,6 +19,8 @@
         <tr class="auction" data-id="@auction.Id">
             <td>
                 <img class="img-polaroid" src="@auction.ThumbnailUrl" />
+            </td>
+            <td>
                 <span class="title">
                     @Html.ActionLink(auction.Title, "Details", "Auctions", new { id = auction.Id })
                 </span>

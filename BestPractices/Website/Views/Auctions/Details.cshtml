@@ -3,8 +3,22 @@
     ViewBag.Title = Model.Title;
 }
 
+<style>
+    .auction-details p {
+        margin: 0;
+    }
+    .row-fluid .auction-details [class*="span"] {
+        min-height: 24px;
+    }
 
-<div class="row-fluid">
+    .auction-details label {
+        text-align: right;
+        padding-right: 5px;
+    }
+</style>
+
+
+<div class="auction-info row-fluid">
     
     <div class="span4">
         <p>&nbsp;</p>
@@ -15,33 +29,34 @@
         
         <h3 class="title">@Model.Title</h3>
         
-        <div class="row-fluid form-horizontal">
+        <div class="auction-details row-fluid">
             
             <div class="span8">
-                <p class="control-group">
-                    <label class="control-label muted">Item Condition:</label>
+                <p class="clearfix">
+                    <label class="span3 muted">Condition:</label>
                     <span class="condition">@Model.Condition</span>
                 </p>
 
-                <p class="control-group">
-                    <label class="control-label muted">Time left:</label>
+                <p class="clearfix">
+                    <label class="span3 muted">Time left:</label>
                     <span class="ends-in">@Model.EndsIn</span>
                     <small class="muted">(@Model.EndTime)</small>
                 </p>
             
                 <div class="well well-small">
-                    <p class="control-group">
-                        <label class="control-label muted">
+                    <p class="clearfix">
+                        <label class="span3 muted">
                             @(Model.HasBids ? "Current" : "Starting") Bid:
                         </label>
                         <span class="current-price">@Model.CurrentPriceDisplay</span>
                         <span class="pull-right">[@Html.ActionLink("Bid History", "History", "Auctions", new { id = Model.Id })]</span>
                     </p>
                     
-                @using(Html.BeginForm("Bid", "Auctions", FormMethod.Post)) {
-                    <p class="control-group">
-                        <span class="span3">&nbsp;</span>
-                        <span class="input-prepend">
+
+                    @using(Html.BeginForm("Bid", "Auctions", FormMethod.Post)) {
+                    <p class="clearfix">
+                        <label class="span3 muted">&nbsp;</label>
+                        <span class="input-prepend span5">
                             <span class="add-on">$</span>
                             <input name="amount" type="text" class="input-small" value="@Model.MinimumBidDisplay">
                         </span>
