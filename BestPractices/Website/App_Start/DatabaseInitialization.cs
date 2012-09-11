@@ -1,27 +1,60 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Common;
 using Common.DataAccess;
+using WebMatrix.WebData;
+using Website.Controllers;
 
 namespace Website.App_Start
 {
-    public class DataContextConfig
+    public class DatabaseConfig
     {
-        public static void InitializeDataContext()
+        public static void InitializeDatabases()
         {
-            Database.SetInitializer(new AuctionContextInitializer());
+            new SimpleMembershipInitializer().Initialize();
+
+            Database.SetInitializer(new DataContextInitializer(new MembershipContext()));
         }
 
-        class AuctionContextInitializer
+        private class SimpleMembershipInitializer
+        {
+            public void Initialize()
+            {
+                Database.SetInitializer<MembershipContext>(null);
+
+                try
+                {
+                    using (var context = new MembershipContext())
+                    {
+                        if (!context.Database.Exists())
+                        {
+                            // Create the SimpleMembership database without Entity Framework migration schema
+                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
+                        }
+                    }
+
+                    WebSecurity.InitializeDatabaseConnection("Membership", "UserProfiles", "UserId", "Username", autoCreateTables: true);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
+                }
+            }
+        }
+
+        class DataContextInitializer
 //            : DropCreateDatabaseIfModelChanges<DataContext>
             : DropCreateDatabaseAlways<DataContext>
         {
+            private readonly MembershipContext _membership;
             private readonly Random _random;
             private UserProfile[] _users;
 
-            public AuctionContextInitializer()
+            public DataContextInitializer(MembershipContext membership)
             {
+                _membership = membership;
                 _random = new Random();
             }
 
@@ -37,9 +70,9 @@ namespace Website.App_Start
 
                 foreach (var user in _users)
                 {
-                    context.Users.Add(user);
+                    _membership.UserProfiles.Add(user);
                 }
-                context.SaveChanges();
+                _membership.SaveChanges();
 
                 // Categories
                 var collectibles = new Category { Name = "Collectibles" };
@@ -87,7 +120,7 @@ namespace Website.App_Start
 
             private void AddAuction(DataContext context, Auction auction)
             {
-                auction.Seller = _users[_random.Next(0, _users.Length - 1)];
+                auction.SellerUsername = _users[_random.Next(0, _users.Length - 1)].Username;
                 auction.StartingPrice = _random.Next(1, 200);
 
                 auction.StartTime = DateTime.Now
@@ -102,13 +135,13 @@ namespace Website.App_Start
                 context.Auctions.Add(auction);
                 context.SaveChanges();
 
-                var bidders = _users.Where(x => x != auction.Seller).ToArray();
+                var bidders = _users.Where(x => x.Username != auction.SellerUsername).ToArray();
                 for (int i = 0; i < _random.Next(0, 20); i++)
                 {
                     var bidder = bidders[_random.Next(0, bidders.Length - 1)];
-                    var amount = auction.CurrentPrice + _random.Next(0, 10) ?? auction.StartingPrice;
+                    var amount = auction.CurrentPrice + _random.Next(1, 10) ?? auction.StartingPrice;
 
-                    auction.PlaceBid(bidder.Id, amount);
+                    auction.PlaceBid(bidder.Username, amount);
                 }
             }
         }

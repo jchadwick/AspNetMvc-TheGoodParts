@@ -72,7 +72,7 @@
             
                 <p class="clearfix">
                     <label class="span3 muted">Seller:</label>
-                    <span>@Html.ActionLink(Model.SellerUsername ?? " ", "Seller", "Auctions", new { id = Model.Id })</span>
+                    <span>@Html.ActionLink(Model.SellerUsername ?? " ", "Seller", "Auctions", new { id = Model.Id }, null)</span>
                     <small class="seller-feedback muted">(@Model.SellerFeebackPercentageDisplay positive feedback)</small>
                 </p>
 
@@ -82,16 +82,17 @@
                             @(Model.HasBids ? "Current" : "Starting") Bid:
                         </label>
                         <span class="current-price">@Model.CurrentPriceDisplay</span>
-                        <span class="pull-right">[@Html.ActionLink("Bid History", "History", "Auctions", new { id = Model.Id })]</span>
+                        <span class="pull-right">[@Html.ActionLink("Bid History", "History", "Auctions", new { id = Model.Id }, null)]</span>
                     </p>
                     
 
-                    @using(Html.BeginForm("Bid", "Auctions", FormMethod.Post)) {
+                    @using (Html.BeginForm("Bid", "Auctions", new { id = Model.Id }, FormMethod.Post))
+                    {
                     <p class="clearfix">
                         <label class="span2 muted">&nbsp;</label>
                         <span class="input-prepend span4">
                             <span class="add-on">$</span>
-                            <input name="amount" type="text" required="true" class="input-mini" placeholder="@Model.MinimumBidDisplay">
+                            <input name="amount" type="text" required="true" class="input-mini" value="@Model.MinimumBidDisplay">
                         </span>
                         <input type="submit" value="Place Bid" class="btn btn-primary"/>
                     </p>

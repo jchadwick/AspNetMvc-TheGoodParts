@@ -13,8 +13,7 @@ namespace Common
         public virtual Auction Auction { get; set; }
 
         [Required]
-        public long UserId { get; set; }
-        public virtual UserProfile User { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [Display(Name ="Bid Amount")]

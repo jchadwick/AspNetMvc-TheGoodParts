@@ -52,6 +52,26 @@ namespace Website.Controllers
             return View("Auctions", viewModel);
         }
 
+        [Authorize]
+        public ActionResult Bid(int id, decimal amount)
+        {
+            var auction = _db.Auctions.Find(id);
+
+            if (auction == null)
+                return HttpNotFound("Auction not found");
+
+            if(auction.CurrentPrice >= amount)
+            {
+                TempData["ErrorMessage"] = "Your bid isn't higher than the current bid - try again!";
+            }
+
+            auction.PlaceBid(User.Identity.Name, amount);
+
+            TempData["SuccessMessage"] = "Congratulations - you're the highest bidder!";
+
+            return RedirectToAction("Details", new {id});
+        }
+
         public ActionResult Details(int id)
         {
             var auction = _db.Auctions.Find(id);

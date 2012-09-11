@@ -27,7 +27,6 @@ namespace Website.Models
         public string CategoryKey { get; set; }
         public string CategoryName { get; set; }
 
-        public long SellerId { get; set; }
         public string SellerUsername { get; set; }
         public int SellerFeebackPercentage { get; set; }
         public string SellerFeebackPercentageDisplay
@@ -35,7 +34,6 @@ namespace Website.Models
             get { return SellerFeebackPercentage + "%"; }
         }
 
-        public long? TopBidderId { get; set; }
         public string TopBidderUsername { get; set; }
 
 
@@ -91,6 +89,7 @@ namespace Website.Models
                 return (CurrentPrice + .10m).Value;
             }
         }
+
         public string MinimumBidDisplay
         {
             get { return MinimumBid.ToString("g"); }

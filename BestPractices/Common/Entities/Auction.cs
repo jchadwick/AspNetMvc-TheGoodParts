@@ -24,11 +24,10 @@ namespace Common
         private long? _categoryId;
         public virtual Category Category { get; set; }
 
-        public virtual long? SellerId { get; set; }
-        public virtual UserProfile Seller { get; set; }
+        [Required]
+        public virtual string SellerUsername { get; set; }
 
-        public virtual long? TopBidderId { get; set; }
-        public virtual UserProfile TopBidder { get; set; }
+        public virtual string TopBidderUsername { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -82,14 +81,14 @@ namespace Common
             Bids = new List<Bid>();
         }
 
-        public void PlaceBid(long userId, decimal amount)
+        public void PlaceBid(string username, decimal amount)
         {
             if (CurrentPrice != null && amount <= CurrentPrice)
                 throw new ApplicationException("Bid amount must exceed current price");
 
-            TopBidderId = userId;
+            TopBidderUsername = username;
             CurrentPrice = amount;
-            Bids.Add(new Bid { AuctionId = Id, UserId = userId, BidAmount = amount });
+            Bids.Add(new Bid { AuctionId = Id, Username = username, BidAmount = amount });
         }
     }
 

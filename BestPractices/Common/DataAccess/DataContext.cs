@@ -7,6 +7,5 @@ namespace Common.DataAccess
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<Bid> Bids { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<UserProfile> Users { get; set; }
     }
 }
