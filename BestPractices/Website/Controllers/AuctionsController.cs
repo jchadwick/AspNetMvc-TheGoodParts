@@ -120,6 +120,7 @@ namespace Website.Controllers
             }
 
             auction.PlaceBid(User.Identity.Name, amount);
+            _db.SaveChanges();
 
             TempData["SuccessMessage"] = "Congratulations - you're the highest bidder!";
 
