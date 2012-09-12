@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Common.DataAccess;
-using Website.Models;
 
-namespace Website.ActionFilters
+namespace Website.Filters
 {
     public class CategoriesActionFilter : ActionFilterAttribute
     {

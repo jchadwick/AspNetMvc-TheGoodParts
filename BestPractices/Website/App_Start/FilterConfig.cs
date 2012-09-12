@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using Common.Util;
-using Website.ActionFilters;
+using Website.Filters;
 
 namespace Website
 {
@@ -15,6 +15,8 @@ namespace Website
         {
             filters.Add(new CategoriesActionFilter());
             filters.Add(new HandleErrorAttribute());
+
+            ValueProviderFactories.Factories.Add(new CurrentUsernameValueProviderFactory());
         }
     }
 }

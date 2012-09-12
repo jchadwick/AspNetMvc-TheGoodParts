@@ -126,7 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilters\CategoriesActionFilter.cs" />
+    <Compile Include="Filters\CategoriesActionFilter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseInitialization.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -135,6 +135,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\CurrentUsernameValueProvider.cs" />
+    <Compile Include="Models\ListItemRequest.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +190,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Auctions\ListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

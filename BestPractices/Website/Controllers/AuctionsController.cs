@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Common;
 using Common.DataAccess;
+using Common.Util;
 using Website.Models;
 
 namespace Website.Controllers
@@ -11,6 +12,7 @@ namespace Website.Controllers
     public class AuctionsController : Controller
     {
         private readonly DataContext _db = new DataContext();
+        public static readonly string AuctionImagesFolder = "~/Content/auction-images";
 
         public ActionResult Categories(string id)
         {
@@ -28,6 +30,58 @@ namespace Website.Controllers
 
             return View("Auctions", viewModel);
         }
+
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ListItem()
+        {
+            var viewModel = new ListItemRequest {
+                    Categories = new SelectList(_db.Categories, "Id", "Name")
+                };
+
+            return View("ListItem", viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult ListItem(ListItemRequest request, HttpPostedFileBase image)
+        {
+            if(ModelState.IsValid)
+            {
+                var auction = new Auction();
+                
+                Mapper.DynamicMap(request, auction);
+
+                if (request.Image != null)
+                {
+                    string imageUrl, thumbnailUrl;
+                    
+                    new ImageRepository(Server.MapPath(AuctionImagesFolder), Url.Content(AuctionImagesFolder))
+                        .SaveImage(request.Image.FileName, request.Image.InputStream,
+                                   out imageUrl, out thumbnailUrl);
+
+                    auction.ImageUrl = imageUrl;
+                    auction.ThumbnailUrl = thumbnailUrl;
+                }
+
+                _db.Auctions.Add(auction);
+                _db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Congratulations, your item has been listed for auction!";
+
+                return RedirectToAction("Details", new { id = auction.Id });
+            }
+            else
+            {
+                TempData["ErrorMessage"] =
+                    "Error listing item - please make sure that you've filled in everything correctly! " + 
+                    string.Join("<br/>", ModelState.Values.Select(x => string.Join(", ", x.Errors.Select(y => y.ErrorMessage))));
+            }
+            return ListItem();
+        }
+
+
 
         public ActionResult Index(string query, int page=0, int size=10)
         {

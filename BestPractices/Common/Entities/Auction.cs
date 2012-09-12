@@ -54,6 +54,7 @@ namespace Common
         [Required]
         [Display(Name ="Starting Price")]
         [DataType(DataType.Currency)]
+        [Range(1, double.MaxValue)]
         public decimal StartingPrice { get; set; }
 
         [Required]
