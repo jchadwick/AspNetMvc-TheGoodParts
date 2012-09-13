@@ -27,7 +27,7 @@ namespace Website.Controllers
             // }
             var viewModels = auctions.Select(Mapper.DynamicMap<AuctionViewModel>);
 
-            return View("_Featured", viewModels);
+            return PartialView("_Featured", viewModels);
         }
     }
 }

@@ -1,14 +1,91 @@
-﻿@model IEnumerable<Website.Models.AuctionViewModel>
+﻿@model IEnumerable<AuctionViewModel>
 
-<section id="featured-auctions">
-    <ul class="auctions">
-        @foreach(var auction in Model)
+@functions
+{
+    IEnumerable<IEnumerable<AuctionViewModel>> GroupedAuctions(IEnumerable<AuctionViewModel> auctions, int groupSize)
+    {
+        var skip = 0;
+
+        while(skip < auctions.Count())
         {
-            <li class="auction" data-id="@auction.Id">
-                <img src="@auction.ThumbnailUrl" />
-                <span class="title">@auction.Title</span>
-                <span class="price">@auction.CurrentPriceDisplay</span>
-            </li>
+            var group = auctions.Skip(skip).Take(groupSize);
+            skip += groupSize;
+            yield return group;
         }
-    </ul>
-</section>
+    }
+}
+
+<style>
+    h2 { text-align: center;}
+    .featured {
+        color: white;
+        padding: 5px 20px;
+        margin: 20px 0;
+        background-image: linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
+background-image: -o-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
+background-image: -moz-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
+background-image: -webkit-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
+background-image: -ms-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.03, rgb(4,65,74)),
+	color-stop(0.52, rgb(22,128,128))
+);
+-moz-border-radius: 15px;
+border-radius: 15px;
+    }
+    #featured-auctions {
+        background-color: #fff;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        padding-top: 20px;
+    }
+    #featured-auctions .item {
+        margin: 0 90px;
+    }
+    #featured-auctions .auction {
+        width: 150px;
+        height: 200px;
+        padding: 0 20px;
+        text-align: center;
+    }
+    #featured-auctions .auction img {
+        min-height: 100px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="featured">
+<h2 class="">Featured Auctions</h2>
+<div id="featured-auctions" class="carousel slide">
+    <div class="carousel-inner">
+        @{ var first = true; }
+
+        @foreach (var auctions in GroupedAuctions(Model, 2))
+        {
+            <div class="item @(first ? "active": "")">
+                <ul class="unstyled">
+                @foreach (var auction in auctions)
+                {
+                    <li class="auction pull-left" data-id="@auction.Id">
+                        <a href="@Url.Action("Details", "Auctions", new { id = auction.Id })">
+                        <img class="img-polaroid" src="@auction.ThumbnailUrl" />
+                        <div class="title">@auction.Title</div>
+                        <div><span class="price label label-success">@auction.CurrentPriceDisplay</span></div>
+                        </a>
+                    </li>
+                }
+                </ul>
+            </div>
+            
+            first = false;
+        }
+    </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#featured-auctions" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#featured-auctions" data-slide="next">&rsaquo;</a>
+</div>
+</div>

@@ -6,15 +6,16 @@
     <title>@ViewBag.Title | MVC Auctions</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/global")
+    <style>
+        #sub-nav { border-top: none; }
+    </style>
 </head>
 <body>
     @Html.Partial("_Navigation")
     
-    <div class="clearfix">&nbsp;</div>
-
     <div class="container">
         
-        <div class="well well-small">
+        <div id="sub-nav" class="well well-small">
             <div class="clearfix">
                 <div class="pull-left">
                     <h4>@ViewBag.Title</h4>
@@ -30,10 +31,11 @@
 
         @RenderBody()
 
-        <hr />
+        <hr class="clearfix" />
         <footer>
             <p>&copy; MVC Auctions @DateTime.Now.Year</p>
         </footer>
+
     </div>
 
     @RenderSection("scripts", required: false)
