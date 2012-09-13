@@ -10,12 +10,13 @@ namespace Website
     {
         protected void Application_Start()
         {
+            DatabaseConfig.InitializeDatabases();
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            DatabaseConfig.InitializeDatabases();
+            ModelBindingConfig.RegisterCustomModelBinding();
         }
     }
 }

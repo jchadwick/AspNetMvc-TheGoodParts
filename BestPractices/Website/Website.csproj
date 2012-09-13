@@ -126,6 +126,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ModelBindingConfig.cs" />
+    <Compile Include="Extensions\TempDataExtensions.cs" />
     <Compile Include="Filters\CategoriesActionFilter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseInitialization.cs" />
@@ -191,6 +193,8 @@
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Auctions\ListItem.cshtml" />
+    <Content Include="Views\Shared\_SearchBar.cshtml" />
+    <Content Include="Views\Shared\_AlertPane.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

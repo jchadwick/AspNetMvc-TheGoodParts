@@ -15,8 +15,6 @@ namespace Website
         {
             filters.Add(new CategoriesActionFilter());
             filters.Add(new HandleErrorAttribute());
-
-            ValueProviderFactories.Factories.Add(new CurrentUsernameValueProviderFactory());
         }
     }
 }

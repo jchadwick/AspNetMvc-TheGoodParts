@@ -9,10 +9,14 @@
 </head>
 <body>
     @Html.Partial("_Navigation")
+    
+    <div class="clearfix">&nbsp;</div>
 
     <div class="container">
-        @if(TempData["SuccessMessage"] != null) {<div class="alert-success">@TempData["SuccessMessage"]</div>}
-        @if(TempData["ErrorMessage"] != null) {<div class="alert-error">@TempData["ErrorMessage"]</div>}
+        
+        @Html.Partial("_SearchBar")
+        
+        @Html.Partial("_AlertPane")
 
         @RenderBody()
 

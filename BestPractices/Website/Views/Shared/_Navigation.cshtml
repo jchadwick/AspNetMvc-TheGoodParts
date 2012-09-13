@@ -18,22 +18,16 @@
                 </ul>
             </div>
             <div class="pull-right">
-                <form action="@Url.Action("Index", "Auctions")" method="GET" class="navbar-search form-inline">
-                    <input name="query" type="text" class="search-query" placeholder="Search">
-                </form>
-                
-                <div class="actions pull-right">
-                    @Html.ActionLink("Sell item", "ListItem", "Auctions")
+                @Html.ActionLink("Sell item", "ListItem", "Auctions")
                     
-                    @if(!User.Identity.IsAuthenticated)
-                    {
-                        @Html.ActionLink("Sign in", "Login", "Account")
-                    }
-                    else
-                    {
-                        <span>[@User.Identity.Name]</span>
-                    }
-                </div>
+                @if(!User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Sign in", "Login", "Account")
+                }
+                else
+                {
+                    <span>[@User.Identity.Name]</span>
+                }
             </div>
         </div>
     </div>

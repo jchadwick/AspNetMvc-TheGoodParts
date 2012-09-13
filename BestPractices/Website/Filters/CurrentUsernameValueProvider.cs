@@ -6,14 +6,6 @@ using System.Web.Mvc;
 
 namespace Website.Filters
 {
-    public class CurrentUsernameValueProviderFactory : ValueProviderFactory
-    {
-        public override IValueProvider GetValueProvider(ControllerContext controllerContext)
-        {
-            return new CurrentUsernameValueProvider(Thread.CurrentThread.CurrentCulture);
-        }
-    }
-
     public class CurrentUsernameValueProvider : IValueProvider
     {
         private readonly CultureInfo _culture;
@@ -32,6 +24,15 @@ namespace Website.Filters
         {
             var username = HttpContext.Current.User.Identity.Name;
             return new ValueProviderResult(username, username, _culture);
+        }
+
+
+        public class Factory : ValueProviderFactory
+        {
+            public override IValueProvider GetValueProvider(ControllerContext controllerContext)
+            {
+                return new CurrentUsernameValueProvider(Thread.CurrentThread.CurrentCulture);
+            }
         }
     }
 

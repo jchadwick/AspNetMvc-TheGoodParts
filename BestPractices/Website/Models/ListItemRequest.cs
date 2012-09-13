@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
+using Website.Filters;
 
 namespace Website.Models
 {
@@ -10,7 +11,13 @@ namespace Website.Models
         public long CategoryId { get; set; }
         public SelectList Categories { get; set; }
 
+        /// <summary>
+        /// Populated by the <see cref="CurrentUsernameValueProvider"/>
+        /// </summary>
         public string CurrentUserName { get; set; }
+
+        // Property with the same name as the Auction.SellerUsername
+        // so that the Mapper will automatically map it by convention
         public string SellerUsername
         {
             get { return CurrentUserName; }

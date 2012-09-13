@@ -5,6 +5,7 @@ using AutoMapper;
 using Common;
 using Common.DataAccess;
 using Common.Util;
+using Website.Extensions;
 using Website.Models;
 
 namespace Website.Controllers
@@ -68,15 +69,13 @@ namespace Website.Controllers
                 _db.Auctions.Add(auction);
                 _db.SaveChanges();
 
-                TempData["SuccessMessage"] = "Congratulations, your item has been listed for auction!";
+                TempData.SuccessMessage("Congratulations, your item has been listed for auction!");
 
                 return RedirectToAction("Details", new { id = auction.Id });
             }
             else
             {
-                TempData["ErrorMessage"] =
-                    "Error listing item - please make sure that you've filled in everything correctly! " + 
-                    string.Join("<br/>", ModelState.Values.Select(x => string.Join(", ", x.Errors.Select(y => y.ErrorMessage))));
+                TempData.ErrorMessage("Error listing item - please make sure that you've filled in everything correctly! ");
             }
             return ListItem();
         }
@@ -116,13 +115,19 @@ namespace Website.Controllers
 
             if(auction.CurrentPrice >= amount)
             {
-                TempData["ErrorMessage"] = "Your bid isn't higher than the current bid - try again!";
+                TempData.ErrorMessage(
+                        "Your bid of {0:c} isn't higher than the current bid ({1:c}). Try again!",
+                        amount, auction.CurrentPrice);
+
+                return RedirectToAction("Details", new { id = auction.Id });
             }
 
             auction.PlaceBid(User.Identity.Name, amount);
             _db.SaveChanges();
 
-            TempData["SuccessMessage"] = "Congratulations - you're the highest bidder!";
+            TempData.SuccessMessage(
+                "Congratulations - you're the highest bidder at {0:c}!", 
+                auction.CurrentPrice);
 
             return RedirectToAction("Details", new {id});
         }
