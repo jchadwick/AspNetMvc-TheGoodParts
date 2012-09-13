@@ -1,4 +1,4 @@
-﻿@model Website.Models.ListItemRequest
+﻿@model ListItemRequest
 
 @{
     ViewBag.Title = "List Item for Sale";
@@ -15,8 +15,7 @@
             <label for="CategoryId">Category</label>
         </div>
         <div class="editor-field">
-            @Html.DropDownList("CategoryId", Model.Categories)
-            @Html.ValidationMessage("CategoryId")
+            @Html.CategorySelector(Model.CategoryId, validate: true)
         </div>
 
         <div class="editor-label">

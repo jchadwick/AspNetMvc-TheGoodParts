@@ -1,0 +1,13 @@
+﻿@helper AlertPane(string message, string type) {
+    if (message != null)
+    {
+        <div class="alert alert-@type">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            @message
+        </div>
+    }
+}
+
+@AlertPane(TempData.SuccessMessage(), "success")
+
+@AlertPane(TempData.ErrorMessage(), "error")

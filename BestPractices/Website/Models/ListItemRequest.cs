@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using System.Web.Mvc;
 using Website.Filters;
 
 namespace Website.Models
@@ -9,7 +8,6 @@ namespace Website.Models
     public class ListItemRequest
     {
         public long CategoryId { get; set; }
-        public SelectList Categories { get; set; }
 
         /// <summary>
         /// Populated by the <see cref="CurrentUsernameValueProvider"/>

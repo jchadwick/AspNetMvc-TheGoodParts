@@ -13,12 +13,12 @@
                 <ul class="nav">
                 @foreach(Category category in ViewBag.Categories)
                 {
-                    <li>@Html.ActionLink(category.Name, "Categories", "Auctions", new { id = category.Key }, null)</li>
+                    <li>@Html.ActionLink(category.Name, "ByCategory", "Auctions", new { id = category.Key }, null)</li>
                 }
                 </ul>
             </div>
             <div class="pull-right">
-                @Html.ActionLink("Sell item", "ListItem", "Auctions")
+                @Html.ActionLink("Sell item", "Index", "ListItem")
                     
                 @if(!User.Identity.IsAuthenticated)
                 {

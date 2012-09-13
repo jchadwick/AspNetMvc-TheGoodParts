@@ -15,7 +15,7 @@ namespace Website.Controllers
         private readonly DataContext _db = new DataContext();
         public static readonly string AuctionImagesFolder = "~/Content/auction-images";
 
-        public ActionResult Categories(string id)
+        public ActionResult ByCategory(string id)
         {
             var category = _db.Categories.FirstOrDefault(x => x.Key == id);
             
@@ -23,6 +23,9 @@ namespace Website.Controllers
                 return HttpNotFound();
 
             var auctions = _db.Auctions.Where(x => x.CategoryId == category.Id);
+
+            ViewBag.Title = category.Name;
+            ViewBag.SelectedCategory = category.Key;
 
             var viewModel = new AuctionsViewModel
             {
@@ -32,57 +35,7 @@ namespace Website.Controllers
             return View("Auctions", viewModel);
         }
 
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult ListItem()
-        {
-            var viewModel = new ListItemRequest {
-                    Categories = new SelectList(_db.Categories, "Id", "Name")
-                };
-
-            return View("ListItem", viewModel);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult ListItem(ListItemRequest request, HttpPostedFileBase image)
-        {
-            if(ModelState.IsValid)
-            {
-                var auction = new Auction();
-                
-                Mapper.DynamicMap(request, auction);
-
-                if (request.Image != null)
-                {
-                    string imageUrl, thumbnailUrl;
-                    
-                    new ImageRepository(Server.MapPath(AuctionImagesFolder), Url.Content(AuctionImagesFolder))
-                        .SaveImage(request.Image.FileName, request.Image.InputStream,
-                                   out imageUrl, out thumbnailUrl);
-
-                    auction.ImageUrl = imageUrl;
-                    auction.ThumbnailUrl = thumbnailUrl;
-                }
-
-                _db.Auctions.Add(auction);
-                _db.SaveChanges();
-
-                TempData.SuccessMessage("Congratulations, your item has been listed for auction!");
-
-                return RedirectToAction("Details", new { id = auction.Id });
-            }
-            else
-            {
-                TempData.ErrorMessage("Error listing item - please make sure that you've filled in everything correctly! ");
-            }
-            return ListItem();
-        }
-
-
-
-        public ActionResult Index(string query, int page=0, int size=10)
+        public ActionResult Index(string query, string category, int page=0, int size=10)
         {
             IQueryable<Auction> auctions = _db.Auctions;
 
@@ -92,6 +45,20 @@ namespace Website.Controllers
                            x.Title.ToLower().IndexOf(query.ToLower()) >= 0
                         || x.Description.ToLower().IndexOf(query.ToLower()) >= 0
                     );
+
+                ViewBag.Query = query;
+                ViewBag.Title = string.Format("Search results for '{0}'", query);
+            }
+
+            if(!string.IsNullOrWhiteSpace(category))
+            {
+                var cat = _db.Categories.FirstOrDefault(x => x.Key == category);
+                if(cat != null)
+                {
+                    auctions = auctions.Where(x => x.CategoryId == cat.Id);
+
+                    ViewBag.SelectedCategory = cat.Key;
+                }
             }
 
             auctions = auctions.OrderBy(x => x.EndTime).Skip(page*size).Take(size);
@@ -100,6 +67,7 @@ namespace Website.Controllers
                     Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>).ToArray(),
                     Page = page,
                     PageSize = size,
+                    SearchQuery = query,
                 };
 
             return View("Auctions", viewModel);

@@ -14,8 +14,18 @@
 
     <div class="container">
         
-        @Html.Partial("_SearchBar")
-        
+        <div class="well well-small">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4>@ViewBag.Title</h4>
+                    @RenderSection("Title", false)
+                </div>
+                <div class="pull-right clearfix inline">
+                    @Html.Partial("_SearchBar")
+                </div>
+            </div>
+        </div>
+
         @Html.Partial("_AlertPane")
 
         @RenderBody()
