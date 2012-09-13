@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title | MVC Auctions</title>
+    <title>@(string.IsNullOrWhiteSpace(ViewBag.Title) ? "" : ViewBag.Title + " |") MVC Auctions</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/global")
     <style>

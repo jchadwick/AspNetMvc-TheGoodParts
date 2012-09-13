@@ -1,4 +1,7 @@
 ﻿@model AuctionViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
 <style>
     #auction-info {
         margin-bottom: 20px;
@@ -38,12 +41,10 @@
 </style>
 
 
-@section Title {
-    <p>
-        <i class="icon-arrow-left">&nbsp;</i>
-        <a href="javascript: history.back()">Back to search results</a>
-    </p>
-}
+<p>
+    <i class="icon-arrow-left">&nbsp;</i>
+    <a href="javascript: history.back()">Back to search results</a>
+</p>
 
 <div id="auction-info" class="row-fluid">
     
