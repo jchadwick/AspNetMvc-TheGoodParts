@@ -49,12 +49,17 @@ border-radius: 15px;
     #featured-auctions .auction {
         width: 150px;
         height: 200px;
-        padding: 0 20px;
+        padding: 0 10px;
         text-align: center;
     }
     #featured-auctions .auction img {
         min-height: 100px;
         margin-bottom: 10px;
+    }
+    #featured-auctions .auction .title {
+        height: 22px;
+        max-height: 22px;
+        overflow: hidden;
     }
 </style>
 
@@ -64,7 +69,7 @@ border-radius: 15px;
     <div class="carousel-inner">
         @{ var first = true; }
 
-        @foreach (var auctions in GroupedAuctions(Model, 2))
+        @foreach (var auctions in GroupedAuctions(Model, 4))
         {
             <div class="item @(first ? "active": "")">
                 <ul class="unstyled">

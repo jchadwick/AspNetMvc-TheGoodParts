@@ -11,8 +11,14 @@ namespace Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        private readonly DataContext _db = new DataContext();
         public static readonly string AuctionImagesFolder = "~/Content/auction-images";
+
+        private readonly DataContext _db;
+
+        public AuctionsController(DataContext db)
+        {
+            _db = db;
+        }
 
         public ActionResult ByCategory(string id)
         {
@@ -36,6 +42,12 @@ namespace Website.Controllers
 
         public ActionResult Index(string query, long? category, int page=0, int size=10)
         {
+            var viewModel = new AuctionsViewModel {
+                    Page = page,
+                    PageSize = size,
+                    SearchQuery = query,
+                };
+
             IQueryable<Auction> auctions = _db.Auctions;
 
             if(!string.IsNullOrWhiteSpace(query))
@@ -57,17 +69,12 @@ namespace Website.Controllers
                     auctions = auctions.Where(x => x.CategoryId == cat.Id);
 
                     ViewBag.SelectedCategory = cat.Id;
+                    viewModel.CategoryName = cat.Name;
                 }
             }
 
             auctions = auctions.OrderBy(x => x.EndTime).Skip(page*size).Take(size);
-
-            var viewModel = new AuctionsViewModel {
-                    Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>).ToArray(),
-                    Page = page,
-                    PageSize = size,
-                    SearchQuery = query,
-                };
+            viewModel.Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>).ToArray();
 
             return View("Auctions", viewModel);
         }

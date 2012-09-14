@@ -8,6 +8,7 @@ namespace Website.Models
         public int Page { get; set; }
         public int PageSize { get; set; }
         public int TotalAuctionsCount { get; set; }
+        public string CategoryName { get; set; }
         public string SearchQuery { get; set; }
 
         public IEnumerable<AuctionViewModel> Auctions { get; set; }
@@ -16,6 +17,5 @@ namespace Website.Models
         {
             get { return (Auctions ?? Enumerable.Empty<AuctionViewModel>()).Count(); }
         }
-
     }
 }
