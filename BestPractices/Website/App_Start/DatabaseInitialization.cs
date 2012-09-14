@@ -91,6 +91,17 @@ namespace Website.App_Start
                 AddAuction(context, new Auction
                                          {
                                              IsFeatured = true,
+                                             Category = collectibles,
+                                             Title = "Hand Painted 24x18 Velvet Elvis",
+                                             Description = "This is a fantastic price on a New Hand Painted 24x18 Velvet Elvis Presley White Jump Suit w/Guitar Painting.",
+                                             ImageUrl = "/content/auction-images/velvet-elvis.jpg",
+                                             ThumbnailUrl = "/content/auction-images/velvet-elvis_thumb.jpg",
+                                         });
+
+
+                AddAuction(context, new Auction
+                                         {
+                                             IsFeatured = true,
                                              Category = electronics,
                                              Title = "Apple MacBook Pro 13\"",
                                              Description = "The Apple MacBook Pro with a 13\" display",
