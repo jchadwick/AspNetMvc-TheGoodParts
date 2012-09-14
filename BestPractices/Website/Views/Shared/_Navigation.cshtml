@@ -18,16 +18,28 @@
                 </ul>
             </div>
             <div class="pull-right">
-                @Html.ActionLink("Sell item", "Index", "ListItem")
-                    
-                @if(!User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Sign in", "Login", "Account")
-                }
-                else
-                {
-                    <span>[@User.Identity.Name]</span>
-                }
+                <ul class="nav">
+                    <li>
+                        <a href="@Url.Action("Index", "ListItem")">
+                            <i class="icon-share"></i>
+                            Sell item
+                        </a>
+                    </li>
+                    <li>
+                    @if(!User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Sign in", "Login", "Account")
+                    }
+                    else
+                    {
+                        <div style="margin: 10px 0 10px 10px;">
+                        <i class=" icon-user"></i> 
+                        @User.Identity.Name
+                        @Html.ActionLink("[logout]", "LogOff", "Account")
+                        </div>
+                    }
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

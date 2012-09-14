@@ -1,10 +1,8 @@
 ﻿using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Common;
 using Common.DataAccess;
-using Common.Util;
 using Website.Extensions;
 using Website.Models;
 
@@ -25,7 +23,7 @@ namespace Website.Controllers
             var auctions = _db.Auctions.Where(x => x.CategoryId == category.Id);
 
             ViewBag.Title = category.Name;
-            ViewBag.SelectedCategory = category.Key;
+            ViewBag.SelectedCategory = category.Id;
 
             var viewModel = new AuctionsViewModel
             {
@@ -35,7 +33,7 @@ namespace Website.Controllers
             return View("Auctions", viewModel);
         }
 
-        public ActionResult Index(string query, string category, int page=0, int size=10)
+        public ActionResult Index(string query, long? category, int page=0, int size=10)
         {
             IQueryable<Auction> auctions = _db.Auctions;
 
@@ -50,14 +48,14 @@ namespace Website.Controllers
                 ViewBag.Title = string.Format("Search results for '{0}'", query);
             }
 
-            if(!string.IsNullOrWhiteSpace(category))
+            if (category != null)
             {
-                var cat = _db.Categories.FirstOrDefault(x => x.Key == category);
+                var cat = _db.Categories.Find(category);
                 if(cat != null)
                 {
                     auctions = auctions.Where(x => x.CategoryId == cat.Id);
 
-                    ViewBag.SelectedCategory = cat.Key;
+                    ViewBag.SelectedCategory = cat.Id;
                 }
             }
 

@@ -15,7 +15,8 @@
             <label for="CategoryId">Category</label>
         </div>
         <div class="editor-field">
-            @Html.CategorySelector(Model.CategoryId, validate: true)
+            @Html.CategorySelector(Model.CategoryId)
+            @Html.ValidationMessage("CategoryId")
         </div>
 
         <div class="editor-label">

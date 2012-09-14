@@ -2,7 +2,10 @@
     <form action="@Url.Action("Index", "Auctions")" method="GET" class="form-search">
         <div class="input-append pull-right">
             <input name="query" type="text" class="search-query" placeholder="Search" value="@ViewBag.Query" />
-            @Html.CategorySelector(ViewBag.SelectedCategory as string, name: "category", htmlAttributes: new { @class ="span2"})
+            @(Html.CategorySelector(ViewBag.SelectedCategory as long?, 
+                name: "category", htmlAttributes: new { @class ="span2"},
+                optionLabel: "All Categories"
+            ))
             <input class="btn" type="submit" value="Search" />
         </div>
     </form>

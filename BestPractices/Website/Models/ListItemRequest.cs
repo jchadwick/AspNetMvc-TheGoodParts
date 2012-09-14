@@ -7,7 +7,7 @@ namespace Website.Models
 {
     public class ListItemRequest
     {
-        public long CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// Populated by the <see cref="CurrentUsernameValueProvider"/>

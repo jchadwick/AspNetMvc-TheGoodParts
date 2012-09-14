@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -15,19 +13,17 @@ namespace Website.Extensions
         /// <summary>
         /// Depends on Categories populated by <see cref="Website.Filters.CategoriesActionFilter"/>
         /// </summary>
-        public static IHtmlString CategorySelector<T>(this HtmlHelper<T> html, string selectedCategory = null, string name = "CategoryId", bool validate = false, object htmlAttributes = null)
+        public static IHtmlString CategorySelector<T>(this HtmlHelper<T> html, 
+                long? selectedCategory = null, string name = "CategoryId", 
+                string optionLabel = null, object htmlAttributes = null
+            )
         {
             var categories = html.ViewBag.Categories as IEnumerable<Category> ?? Enumerable.Empty<Category>();
-            var selections = new SelectList(categories, "Key", "Name", selectedCategory);
+            var selections = new SelectList(categories, "Id", "Name", selectedCategory);
 
-            var tag = new StringBuilder();
-            tag.AppendLine(html.DropDownList(name, selections, "All Categories", htmlAttributes).ToString());
-            
-            if (validate)
-                tag.AppendLine(html.ValidationMessage(name).ToString());
+            var dropDownList = html.DropDownList(name, selections, optionLabel, htmlAttributes);
 
-            return new HtmlString(tag.ToString());
+            return new HtmlString(dropDownList.ToString());
         }
-
     }
 }
