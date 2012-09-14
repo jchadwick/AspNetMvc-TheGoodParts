@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Common;
@@ -118,6 +119,21 @@ namespace Website.Controllers
         public ActionResult Seller(string id)
         {
             return View("Seller");
+        }
+
+        public ActionResult Autocomplete(string query, long? category)
+        {
+            IEnumerable<Auction> auctions = _db.Auctions;
+
+            if (category != null)
+                auctions = auctions.Where(x => x.CategoryId == category.Value);
+
+            var lowerQuery = query.ToLower();
+            var titles = 
+                auctions.Select(x => x.Title)
+                    .Where(x => x.ToLower().Contains(lowerQuery));
+
+            return Json(titles.ToArray(), JsonRequestBehavior.AllowGet);
         }
     }
 }
