@@ -35,6 +35,7 @@ namespace Website.Controllers
             var viewModel = new AuctionsViewModel
             {
                 Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>).ToArray(),
+                CategoryName = category.Name,
             };
 
             return View("Auctions", viewModel);

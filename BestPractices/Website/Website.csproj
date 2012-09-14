@@ -158,13 +158,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Auctions.css">
+      <DependentUpon>Auctions.scss</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Auctions.scss" />
+    <None Include="Content\Details.scss" />
+    <Content Include="Content\Details.css">
+      <DependentUpon>Details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Featured.css">
+      <DependentUpon>Featured.scss</DependentUpon>
+    </Content>
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Featured.scss" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -25,7 +25,10 @@ namespace Website
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/bootstrap*"
+                        "~/Content/bootstrap*",
+                        "~/Content/Auctions.css",
+                        "~/Content/Details.css",
+                        "~/Content/Featured.css"
                     ));
         }
     }

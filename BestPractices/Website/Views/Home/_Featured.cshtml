@@ -15,56 +15,8 @@
     }
 }
 
-<style>
-    h2 { text-align: center;}
-    .featured {
-        color: white;
-        padding: 5px 20px;
-        margin: 20px 0;
-        background-image: linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
-background-image: -o-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
-background-image: -moz-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
-background-image: -webkit-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
-background-image: -ms-linear-gradient(bottom, rgb(4,65,74) 3%, rgb(22,128,128) 52%);
-
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.03, rgb(4,65,74)),
-	color-stop(0.52, rgb(22,128,128))
-);
--moz-border-radius: 15px;
-border-radius: 15px;
-    }
-    #featured-auctions {
-        background-color: #fff;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        padding-top: 20px;
-    }
-    #featured-auctions .item {
-        margin: 0 90px;
-    }
-    #featured-auctions .auction {
-        width: 150px;
-        height: 200px;
-        padding: 0 10px;
-        text-align: center;
-    }
-    #featured-auctions .auction img {
-        min-height: 100px;
-        margin-bottom: 10px;
-    }
-    #featured-auctions .auction .title {
-        height: 22px;
-        max-height: 22px;
-        overflow: hidden;
-    }
-</style>
-
 <div class="featured">
-<h2 class="">Featured Auctions</h2>
+<h2 class="center">Featured Auctions</h2>
 <div id="featured-auctions" class="carousel slide">
     <div class="carousel-inner">
         @{ var first = true; }
