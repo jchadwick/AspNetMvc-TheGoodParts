@@ -315,7 +315,7 @@
     <Content Include="Views\Auctions\Seller.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\_Featured.cshtml" />
-    <Content Include="Views\ListItem\ListItem.cshtml" />
+    <Content Include="Views\ListItem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

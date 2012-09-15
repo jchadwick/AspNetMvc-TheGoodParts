@@ -20,7 +20,7 @@ namespace Website.Controllers
             var categories = db.Categories;
             ViewBag.Categories = categories;
 
-            return View("ListItem", new Auction());
+            return View(new Auction());
         }
 
         [HttpPost]

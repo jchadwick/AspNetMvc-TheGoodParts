@@ -24,9 +24,6 @@ namespace Website.Controllers
             ViewBag.Categories = categories;
         }
 
-        //
-        // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
