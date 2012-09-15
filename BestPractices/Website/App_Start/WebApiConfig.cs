@@ -1,9 +1,8 @@
 ﻿using System.Web.Http;
-using Common.Util;
 
 namespace Website
 {
-    public class WebApiConfig : IBootstrapperTask
+    public class WebApiConfig
     {
         public void Execute()
         {

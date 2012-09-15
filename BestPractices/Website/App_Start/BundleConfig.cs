@@ -1,9 +1,8 @@
 ﻿using System.Web.Optimization;
-using Common.Util;
 
 namespace Website
 {
-    public class BundleConfig : IBootstrapperTask
+    public class BundleConfig
     {
         public void Execute()
         {

@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
-using Common.Util;
 using Website.Filters;
 
 namespace Website
 {
-    public class FilterConfig : IBootstrapperTask
+    public class FilterConfig
     {
         public void Execute()
         {

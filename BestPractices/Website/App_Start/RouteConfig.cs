@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Common.Util;
 
 namespace Website
 {
-    public class RouteConfig : IBootstrapperTask
+    public class RouteConfig
     {
         public void Execute()
         {
