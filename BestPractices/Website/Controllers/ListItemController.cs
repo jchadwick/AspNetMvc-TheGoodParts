@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Common;
 using Common.DataAccess;
@@ -29,7 +28,7 @@ namespace Website.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Index(ListItemRequest request, HttpPostedFileBase image)
+        public ActionResult Index(ListItemRequest request)
         {
             if (ModelState.IsValid)
             {

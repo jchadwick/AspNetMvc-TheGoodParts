@@ -55,7 +55,16 @@
             <label for="Duration">Duration</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Duration) days
+            <!-- Security risk #2! -->
+            @Html.Hidden("StartTime", DateTime.Now)
+
+            <!-- NOTE: Not actually part of the Auction object! -->
+            <select name="Duration">
+                <option>3</option>
+                <option>5</option>
+                <option>7</option>
+                <option>10</option>
+            </select> days
             @Html.ValidationMessage("Duration")
         </div>
 
