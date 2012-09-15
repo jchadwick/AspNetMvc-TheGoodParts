@@ -1,6 +1,8 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using Common;
 using Website.Filters;
 
 namespace Website.Models
@@ -20,6 +22,9 @@ namespace Website.Models
         {
             get { return CurrentUserName; }
         }
+
+        [DefaultValue(ItemCondition.New)]
+        public ItemCondition Condition { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -49,6 +54,7 @@ namespace Website.Models
         {
             get { return StartTime.AddDays(Duration); }
         }
+
 
         public ListItemRequest()
         {

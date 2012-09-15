@@ -3,14 +3,19 @@
 <table id="auctions" class="table table-hover table-condensed">
     <thead>
         <tr>
-            <th colspan="2"><h3>@Model.Category.Name</h3></th>
+            <th colspan="2"><h3>@ViewBag.CategoryName</h3></th>
             <th class="span2">Current Price</th>
             <th class="span3">Ends In</th>
         </tr>
     </thead>
 
-    @foreach (var auction in Model.Auctions)
+    @foreach (var auction in Model)
     {
+        var endTime = auction.EndTime - DateTime.Now;
+        var endsToday = endTime < TimeSpan.FromDays(1);
+        var endTimeDisplay = endTime.ToString();
+        var currentPriceDisplay = (auction.CurrentPrice ?? auction.StartingPrice).ToString("{0:c}");
+
         <tr class="auction" data-id="@auction.Id">
             <td class="span2">
                 <img class="img-polaroid" src="@auction.ThumbnailUrl" />
@@ -22,11 +27,11 @@
                 <span class="muted">Condition: @auction.Condition</span>
             </td>
             <td>
-                <span class="price">@auction.CurrentPriceDisplay</span>
+                <span class="price">@currentPriceDisplay</span>
             </td>
             <td>
-                <span class="ends-in @(auction.EndsToday ? "text-warning" : "")" title="@auction.EndTime">
-                    @auction.EndsIn
+                <span class="ends-in @(endsToday ? "text-warning" : "")" title="@auction.EndTime">
+                    @endTimeDisplay
                 </span>
             </td>
         </tr>

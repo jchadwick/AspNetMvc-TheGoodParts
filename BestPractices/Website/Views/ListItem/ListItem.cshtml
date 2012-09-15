@@ -20,6 +20,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.Condition)
+        </div>
+        <div class="editor-field">
+            @Html.ConditionSelector(Model.Condition)
+            @Html.ValidationMessageFor(model => model.Condition)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.Title)
         </div>
         <div class="editor-field">

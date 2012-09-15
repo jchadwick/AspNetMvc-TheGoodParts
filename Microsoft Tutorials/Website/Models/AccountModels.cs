@@ -21,7 +21,7 @@ namespace Website.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string Username { get; set; }
-        public double FeebackPercentage { get; set; }
+        public double? FeebackPercentage { get; set; }
     }
 
     public class RegisterExternalLoginModel

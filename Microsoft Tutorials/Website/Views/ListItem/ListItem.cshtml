@@ -1,4 +1,5 @@
-﻿@model Common.Auction
+﻿@using Common
+@model Common.Auction
 
 @{
     ViewBag.Title = "List Item for Sale";
@@ -8,18 +9,31 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <!-- ZOMG Security Risk!! -->
+    <!-- ZOMG: Security Risk!! -->
     @Html.Hidden("SellerUsername", User.Identity.Name)
     
     @Html.ValidationSummary(true)
 
     <fieldset>
         <div class="editor-label">
-            <label for="CategoryId">Category</label>
+            @Html.LabelFor(model => model.CategoryId)
         </div>
         <div class="editor-field">
-            @Html.CategorySelector(Model.CategoryId)
-            @Html.ValidationMessage("CategoryId")
+            @Html.EditorFor(model => model.CategoryId)
+            @Html.ValidationMessageFor(model => model.CategoryId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Condition)
+        </div>
+        <div class="editor-field">
+            <select name="Condition">
+                @foreach(var condition in Enum.GetNames(typeof(ItemCondition)))
+                {
+                <option>@condition</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Condition)
         </div>
 
         <div class="editor-label">
@@ -50,7 +64,11 @@
             <label for="Duration">Duration</label>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Duration) days
+            <!-- Security risk #2! -->
+            @Html.Hidden("StartTime", DateTime.Now)
+
+            <!-- NOTE: Not actually part of the Auction object! -->
+            <input name="Duration" type="number"> days
             @Html.ValidationMessage("Duration")
         </div>
 

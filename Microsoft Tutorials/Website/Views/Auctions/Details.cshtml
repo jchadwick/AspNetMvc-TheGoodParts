@@ -4,12 +4,10 @@
 }
 
 
-@section Title {
-    <a href="javascript: history.back()">
-        <i class="icon-arrow-left">&nbsp;</i>
-        Back to search results
-    </a>
-}
+<a href="javascript: history.back()">
+    <i class="icon-arrow-left">&nbsp;</i>
+    Back to search results
+</a>
 
 
 <div id="auction-info" class="row-fluid">
@@ -32,22 +30,22 @@
 
                 <p class="clearfix">
                     <label class="span3 muted">Time left:</label>
-                    <span class="ends-in">@Model.EndsIn</span>
+                    <span class="ends-in">@(Model.EndTime - DateTime.Now)</span>
                     <small class="muted">(@Model.EndTime)</small>
                 </p>
             
                 <p class="clearfix">
                     <label class="span3 muted">Seller:</label>
                     <span>@Html.ActionLink(Model.SellerUsername ?? " ", "Seller", "Auctions", new { id = Model.Id }, null)</span>
-                    <small class="seller-feedback muted">(@Model.SellerFeebackPercentageDisplay positive feedback)</small>
+                    <small class="seller-feedback muted">(99% positive feedback)</small>
                 </p>
 
                 <div id="bid" class="well well-small">
                     <p class="clearfix">
                         <label class="span3 muted">
-                            @(Model.HasBids ? "Current" : "Starting") Bid:
+                            @(Model.CurrentPrice != null ? "Current" : "Starting") Bid:
                         </label>
-                        <span class="current-price">@Model.CurrentPriceDisplay</span>
+                        <span class="current-price">@Model.CurrentPrice</span>
                         <span class="pull-right">[@Html.ActionLink("Bid History", "History", "Auctions", new { id = Model.Id }, null)]</span>
                     </p>
                     
@@ -58,7 +56,7 @@
                         <label class="span2 muted">&nbsp;</label>
                         <span class="input-prepend span4">
                             <span class="add-on">$</span>
-                            <input name="amount" type="text" required="true" class="input-mini" value="@Model.MinimumBidDisplay">
+                            <input name="amount" type="text" required="true" class="input-mini" value="@(Model.CurrentPrice.GetValueOrDefault(Model.StartingPrice)+0.1m)">
                         </span>
                         <input type="submit" value="Place Bid" class="btn btn-primary"/>
                     </p>

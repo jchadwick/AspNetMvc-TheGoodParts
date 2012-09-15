@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,18 @@ namespace Website.Extensions
 {
     public static class HtmlHelperExtensions
     {
+        public static IHtmlString ConditionSelector<T>(this HtmlHelper<T> html, 
+                ItemCondition? condition = null, string name = "Condition",
+                string optionLabel = null, object htmlAttributes = null
+            )
+        {
+            var conditions = Enum.GetNames(typeof (ItemCondition));
+            var selections = new SelectList(conditions, condition);
+
+            var dropDownList = html.DropDownList(name, selections, optionLabel, htmlAttributes);
+            return new HtmlString(dropDownList.ToString());
+        }
+
 
         /// <summary>
         /// Depends on Categories populated by <see cref="Website.Filters.CategoriesActionFilter"/>
@@ -22,7 +35,6 @@ namespace Website.Extensions
             var selections = new SelectList(categories, "Id", "Name", selectedCategory);
 
             var dropDownList = html.DropDownList(name, selections, optionLabel, htmlAttributes);
-
             return new HtmlString(dropDownList.ToString());
         }
     }

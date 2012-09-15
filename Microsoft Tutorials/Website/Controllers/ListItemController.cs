@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using Common;
 using Common.Util;
@@ -15,12 +16,16 @@ namespace Website.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
+
             return View("ListItem", new Auction());
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult Index(Auction auction, HttpPostedFileBase image)
+        public ActionResult Index(Auction auction, HttpPostedFileBase image, int duration)
         {
             // Try to set the username here...
             auction.SellerUsername = User.Identity.Name;
@@ -29,6 +34,19 @@ namespace Website.Controllers
             // Remove them :(
             if (ModelState.ContainsKey("SellerUsername"))
                 ModelState.Remove("SellerUsername");
+
+            // And we never set the EndTime because we used "duration" instead...
+            if (ModelState.ContainsKey("EndTime"))
+                ModelState.Remove("EndTime");
+
+            if (duration < 3)
+            {
+                ModelState.AddModelError("Duration", "Auction must last at least 3 days");
+            }
+            else
+            {
+                auction.EndTime = auction.StartTime.AddDays(duration);
+            }
 
             if (ModelState.IsValid)
             {

@@ -13,7 +13,11 @@ namespace Website.Controllers
 
         public ActionResult ByCategory(string id)
         {
-            var category = db.Categories.FirstOrDefault(x => x.Key == id);
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
+
+            var category = categories.FirstOrDefault(x => x.Key == id);
             
             if (category == null)
                 return HttpNotFound();
@@ -29,6 +33,10 @@ namespace Website.Controllers
 
         public ActionResult Index(string query, long? category, int page=0, int size=10)
         {
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
+
             IQueryable<Auction> auctions = db.Auctions;
 
             if(!string.IsNullOrWhiteSpace(query))
@@ -44,7 +52,7 @@ namespace Website.Controllers
 
             if (category != null)
             {
-                var cat = db.Categories.Find(category);
+                var cat = categories.Find(category);
                 if(cat != null)
                 {
                     auctions = auctions.Where(x => x.CategoryId == cat.Id);
@@ -92,6 +100,10 @@ namespace Website.Controllers
 
         public ActionResult Details(int id)
         {
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
+
             var auction = db.Auctions.Find(id);
 
             if (auction == null)

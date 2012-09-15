@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Common
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -12,7 +13,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("MVC Auctions", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -20,9 +21,11 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            @foreach(Category category in ViewBag.Categories)
+                            {
+                                <li>@Html.ActionLink(category.Name, "ByCategory", "Auctions", new { id = category.Key }, null)</li>
+                            }
+                            <li>@Html.ActionLink("[Sell Your Item]", "Index", "ListItem")</li>
                         </ul>
                     </nav>
                 </div>
@@ -31,6 +34,16 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                
+                @if(TempData["ErrorMessage"] != null)
+                {
+                    <div class="error alert-panel alert">@TempData["ErrorMessage"]</div>
+                }
+                @if(TempData["SuccessMessage"] != null)
+                {
+                    <div class="success alert-panel alert">@TempData["SuccessMessage"]</div>
+                }
+
                 @RenderBody()
             </section>
         </div>
