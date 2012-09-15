@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Common.Auction>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "";
+}
+
+<h1>Welcome to MVC Auctions!</h1>
+
+@Html.Partial("_Featured", Model)
+
+<div class="clearfix">
+    <p>
+    Here you are on the coolest and most informative ASP.NET MVC demo website ever.
+    </p>
+    <p>
+        What do you do now?  Well, you can:
+        <ul>
+            <li>Try playing around with the Featured Auctions</li>
+            <li>Select one of the categories in the main navigation above</li>
+            <li>Or, try out the Search feature by searching for a keyword</li>
+        </ul>
+    </p>
+</div>
