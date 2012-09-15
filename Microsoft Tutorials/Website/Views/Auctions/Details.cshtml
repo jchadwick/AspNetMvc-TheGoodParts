@@ -30,7 +30,12 @@
 
                 <p class="clearfix">
                     <label class="span3 muted">Time left:</label>
-                    <span class="ends-in">@(Model.EndTime - DateTime.Now)</span>
+                    @{
+                        var endTime = Model.EndTime - DateTime.Now;
+                        var endTimeDisplay = string.Format("{0} days, {1} hours, {2} mins",
+                                                           endTime.Days, endTime.Hours, endTime.Minutes);
+                    }
+                    <span class="ends-in">@endTime</span>
                     <small class="muted">(@Model.EndTime)</small>
                 </p>
             
@@ -64,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="well well-small span4">
+            <div class="well well-small span4 auction-actions">
                 <ul class="actions">
                     <li class="action"><a href="#"><i class="icon-plus-sign"></i> Add to Watch List</a></li>
                     <li class="action"><a href="#"><i class="icon-user"></i> Save seller</a></li>

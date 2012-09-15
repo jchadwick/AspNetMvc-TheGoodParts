@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Common;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
@@ -17,6 +17,13 @@ namespace Website.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            // Set the Categories for the navigation
+            var categories = new DataContext().Categories;
+            ViewBag.Categories = categories;
+        }
+
         //
         // GET: /Account/Login
 

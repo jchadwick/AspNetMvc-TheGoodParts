@@ -20,7 +20,12 @@
     #auction-details label {
         text-align: right;
         padding-right: 5px;
+		display: inline;
     }
+
+	.auction-actions {
+		float: right;
+	}
 
     .actions {
         list-style: none;
@@ -30,4 +35,12 @@
             line-height: 30px;
         }
     }
+
+	.nav-tabs  {
+		padding: 0;
+			list-style: none;
+		li {
+			list-style: none;
+		}
+	}
 }

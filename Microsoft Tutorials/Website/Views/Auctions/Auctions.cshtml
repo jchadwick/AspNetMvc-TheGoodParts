@@ -13,8 +13,9 @@
     {
         var endTime = auction.EndTime - DateTime.Now;
         var endsToday = endTime < TimeSpan.FromDays(1);
-        var endTimeDisplay = endTime.ToString();
-        var currentPriceDisplay = (auction.CurrentPrice ?? auction.StartingPrice).ToString("{0:c}");
+        var endTimeDisplay = string.Format("{0} days, {1} hours, {2} mins",
+                                           endTime.Days, endTime.Hours, endTime.Minutes);
+        var currentPriceDisplay = (auction.CurrentPrice ?? auction.StartingPrice).ToString("c");
 
         <tr class="auction" data-id="@auction.Id">
             <td class="span2">

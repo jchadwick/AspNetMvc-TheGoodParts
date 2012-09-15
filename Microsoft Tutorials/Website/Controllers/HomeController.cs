@@ -10,10 +10,11 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            var featuredAuctions = db.Auctions.Where(x => x.IsFeatured);
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
 
-            // Add the Categories to the view data for navigation, etc.
-            ViewBag.Categories = db.Categories.ToArray();
+            var featuredAuctions = db.Auctions.Where(x => x.IsFeatured);
 
             return View("Homepage", featuredAuctions);
         }
