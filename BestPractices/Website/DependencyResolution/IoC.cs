@@ -1,4 +1,7 @@
+using System.Data.Entity;
+using Common.DataAccess;
 using StructureMap;
+
 namespace Website {
     public static class IoC {
         public static IContainer Initialize() {
@@ -8,9 +11,17 @@ namespace Website {
                                     {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
+                                        scan.RegisterConcreteTypesAgainstTheFirstInterface();
                                     });
-            //                x.For<IExample>().Use<Example>();
+                            x.Scan(scan =>
+                                    {
+                                        scan.Assembly("Common");
+                                        scan.WithDefaultConventions();
+                                        scan.RegisterConcreteTypesAgainstTheFirstInterface();
+                                    });
+                            x.For<DbContext>().Use<DataContext>();
                         });
+
             return ObjectFactory.Container;
         }
     }

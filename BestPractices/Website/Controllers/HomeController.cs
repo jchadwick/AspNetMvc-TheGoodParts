@@ -9,7 +9,12 @@ namespace Website.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository _repository = new DbContextRepository(new DataContext());
+        private readonly IRepository _repository;
+
+        public HomeController(IRepository repository)
+        {
+            _repository = repository;
+        }
 
         public ActionResult Index()
         {

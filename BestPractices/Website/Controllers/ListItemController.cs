@@ -11,10 +11,15 @@ namespace Website.Controllers
 {
     public class ListItemController : Controller
     {
-        private readonly DataContext _db = new DataContext();
         public static readonly string AuctionImagesFolder = "~/Content/auction-images";
 
-        
+        private readonly IRepository _repository;
+
+        public ListItemController(IRepository repository)
+        {
+            _repository = repository;
+        }
+
         [HttpGet]
         [Authorize]
         public ActionResult Index()
@@ -44,8 +49,8 @@ namespace Website.Controllers
                     auction.ThumbnailUrl = thumbnailUrl;
                 }
 
-                _db.Auctions.Add(auction);
-                _db.SaveChanges();
+                _repository.Add(auction);
+                _repository.SaveChanges();
 
                 TempData.SuccessMessage("Congratulations, your item has been listed for auction!");
 

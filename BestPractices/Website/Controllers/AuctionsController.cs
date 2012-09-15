@@ -13,21 +13,21 @@ namespace Website.Controllers
     {
         public static readonly string AuctionImagesFolder = "~/Content/auction-images";
 
-        private readonly DataContext _db;
+        private readonly IRepository _repository;
 
-        public AuctionsController(DataContext db)
+        public AuctionsController(IRepository repository)
         {
-            _db = db;
+            _repository = repository;
         }
 
         public ActionResult ByCategory(string id)
         {
-            var category = _db.Categories.FirstOrDefault(x => x.Key == id);
+            var category = _repository.Query<Category>().FirstOrDefault(x => x.Key == id);
             
             if (category == null)
                 return HttpNotFound();
 
-            var auctions = _db.Auctions.Where(x => x.CategoryId == category.Id);
+            var auctions = _repository.Query<Auction>().Where(x => x.CategoryId == category.Id);
 
             ViewBag.Title = category.Name;
             ViewBag.SelectedCategory = category.Id;
@@ -49,7 +49,7 @@ namespace Website.Controllers
                     SearchQuery = query,
                 };
 
-            IQueryable<Auction> auctions = _db.Auctions;
+            IQueryable<Auction> auctions = _repository.Query<Auction>();
 
             if(!string.IsNullOrWhiteSpace(query))
             {
@@ -64,7 +64,7 @@ namespace Website.Controllers
 
             if (category != null)
             {
-                var cat = _db.Categories.Find(category);
+                var cat = _repository.Find<Category>(category);
                 if(cat != null)
                 {
                     auctions = auctions.Where(x => x.CategoryId == cat.Id);
@@ -83,7 +83,7 @@ namespace Website.Controllers
         [Authorize]
         public ActionResult Bid(int id, decimal amount)
         {
-            var auction = _db.Auctions.Find(id);
+            var auction = _repository.Find<Auction>(id);
 
             if (auction == null)
                 return HttpNotFound("Auction not found");
@@ -98,7 +98,7 @@ namespace Website.Controllers
             }
 
             auction.PlaceBid(User.Identity.Name, amount);
-            _db.SaveChanges();
+            _repository.SaveChanges();
 
             TempData.SuccessMessage(
                 "Congratulations - you're the highest bidder at {0:c}!", 
@@ -109,7 +109,7 @@ namespace Website.Controllers
 
         public ActionResult Details(int id)
         {
-            var auction = _db.Auctions.Find(id);
+            var auction = _repository.Find<Auction>(id);
 
             if (auction == null)
                 return HttpNotFound("Auction not found");
@@ -131,7 +131,7 @@ namespace Website.Controllers
 
         public ActionResult Autocomplete(string query, long? category)
         {
-            IEnumerable<Auction> auctions = _db.Auctions;
+            IEnumerable<Auction> auctions = _repository.Query<Auction>();
 
             if (category != null)
                 auctions = auctions.Where(x => x.CategoryId == category.Value);
