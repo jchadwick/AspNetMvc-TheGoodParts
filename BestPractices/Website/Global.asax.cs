@@ -18,6 +18,12 @@ namespace Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ModelBindingConfig.RegisterCustomModelBinding();
+
+            var webFormViewEngine = ViewEngines.Engines.OfType<WebFormViewEngine>().FirstOrDefault();
+            if(webFormViewEngine != null)
+            {
+                ViewEngines.Engines.Remove(webFormViewEngine);
+            }
         }
     }
 }
