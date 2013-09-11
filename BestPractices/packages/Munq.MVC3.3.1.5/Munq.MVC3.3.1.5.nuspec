@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Munq.MVC3</id>
+    <version>3.1.5</version>
+    <authors>Matthew Dennis</authors>
+    <owners>Matthew Dennis</owners>
+    <licenseUrl>http://www.opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>http://munq.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An implementation of the DependencyResolver for ASP.NET MVC3.  Includes startup code.
+	  3.1.5 - Changes dependency to Munq.IocContainer 3.1.5 to fix Request Lifetime instance issue. All packages same version.</description>
+    <tags>DI ASP.NET web MVC3 IOC</tags>
+    <dependencies>
+      <dependency id="Munq.IocContainer" version="3.1.5" />
+      <dependency id="WebActivator" version="1.4" />
+    </dependencies>
+  </metadata>
+</package>
