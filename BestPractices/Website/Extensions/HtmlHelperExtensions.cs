@@ -28,25 +28,17 @@ namespace Website.Extensions
         {
             var conditions = Enum.GetNames(typeof (ItemCondition));
             var selections = new SelectList(conditions, condition);
-
-            var dropDownList = html.DropDownList(name, selections, optionLabel, htmlAttributes);
-            return new HtmlString(dropDownList.ToString());
+            return html.DropDownList(name, selections, optionLabel, htmlAttributes);
         }
 
 
-        /// <summary>
-        /// Depends on Categories populated by <see cref="Website.Filters.CategoriesActionFilter"/>
-        /// </summary>
         public static IHtmlString CategorySelector<T>(this HtmlHelper<T> html, 
-                long? selectedCategory = null, string name = "CategoryId", 
+                long? selectedCategory = null, string name = null,
                 string optionLabel = null, object htmlAttributes = null
             )
         {
-            var categories = html.ViewBag.Categories as IEnumerable<Category> ?? Enumerable.Empty<Category>();
-            var selections = new SelectList(categories, "Id", "Name", selectedCategory);
-
-            var dropDownList = html.DropDownList(name, selections, optionLabel, htmlAttributes);
-            return new HtmlString(dropDownList.ToString());
+            return html.Action("CategorySelector", "CategorySelector", 
+                new {selectedCategory, name, optionLabel, htmlAttributes});
         }
     }
 }

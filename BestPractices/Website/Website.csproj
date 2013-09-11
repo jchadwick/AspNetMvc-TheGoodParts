@@ -158,6 +158,7 @@
     <Compile Include="App_Start\ModelBindingConfig.cs" />
     <Compile Include="App_Start\MunqMvc3Startup.cs" />
     <Compile Include="Controllers\ListItemController.cs" />
+    <Compile Include="Controllers\CategorySelectorController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\TempDataExtensions.cs" />
     <Compile Include="Filters\CategoriesActionFilter.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Views\ListItem\ListItem.cshtml" />
     <Content Include="Views\Shared\_SearchBar.cshtml" />
     <Content Include="Views\Shared\_AlertPane.cshtml" />
+    <Content Include="Views\CategorySelector\CategorySelector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
