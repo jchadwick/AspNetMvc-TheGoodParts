@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AttributeRouting.Web.Mvc;
 using AutoMapper;
 using Common;
 using Common.DataAccess;
@@ -21,6 +22,7 @@ namespace Website.Controllers
 
         [HttpGet]
         [Authorize]
+        [GET("sell")]
         public ActionResult Index()
         {
             return View("ListItem", new ListItemRequest());
@@ -28,6 +30,7 @@ namespace Website.Controllers
 
         [HttpPost]
         [Authorize]
+        [POST("sell")]
         public ActionResult Index(ListItemRequest request)
         {
             if (ModelState.IsValid)

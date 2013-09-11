@@ -1,5 +1,4 @@
 ﻿@using Common
-@using Website.Models
 <div class="navbar navbar-static-top">
     <div class="navbar-inner">
         <div class="container">
@@ -13,7 +12,7 @@
                 <ul class="nav">
                 @foreach(Category category in ViewBag.Categories)
                 {
-                    <li>@Html.ActionLink(category.Name, "ByCategory", "Auctions", new { id = category.Key }, null)</li>
+                    <li>@Html.CategoryLink(category)</li>
                 }
                 </ul>
             </div>

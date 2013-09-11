@@ -39,6 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AttributeRouting">
+      <HintPath>..\packages\AttributeRouting.Core.3.5.6\lib\net40\AttributeRouting.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web">
+      <HintPath>..\packages\AttributeRouting.Core.Web.3.5.6\lib\net40\AttributeRouting.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web.Mvc">
+      <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
@@ -145,6 +154,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AttributeRoutingConfig.cs" />
     <Compile Include="App_Start\ModelBindingConfig.cs" />
     <Compile Include="App_Start\MunqMvc3Startup.cs" />
     <Compile Include="Controllers\ListItemController.cs" />
@@ -169,8 +179,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\glimpse.mvc3.readme.txt" />
-    <Content Include="App_Readme\glimpse.readme.txt" />
     <Content Include="Content\Auctions.css">
       <DependentUpon>Auctions.scss</DependentUpon>
     </Content>

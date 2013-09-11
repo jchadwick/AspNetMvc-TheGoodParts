@@ -16,6 +16,11 @@ namespace Website.Extensions
             return html.ActionLink(auction.Title, "Details", "Auctions", new {auction.Id}, null);
         }
 
+        public static IHtmlString CategoryLink(this HtmlHelper html, Category category)
+        {
+            return html.ActionLink(category.Name, "ByCategory", "Auctions", new { categoryKey = category.Key }, null);
+        }
+
         public static IHtmlString ConditionSelector<T>(this HtmlHelper<T> html, 
                 ItemCondition? condition = null, string name = "Condition",
                 string optionLabel = null, object htmlAttributes = null

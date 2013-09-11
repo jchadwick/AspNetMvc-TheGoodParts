@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AttributeRouting.Web.Mvc;
 using AutoMapper;
 using Common;
 using Common.DataAccess;
@@ -18,9 +19,10 @@ namespace Website.Controllers
             _repository = repository;
         }
 
-        public ActionResult ByCategory(string id)
+        [GET("categories/{categoryKey}")]
+        public ActionResult ByCategory(string categoryKey)
         {
-            var category = _repository.Query<Category>().FirstOrDefault(x => x.Key == id);
+            var category = _repository.Query<Category>().FirstOrDefault(x => x.Key == categoryKey);
             
             if (category == null)
                 return HttpNotFound();
@@ -39,7 +41,9 @@ namespace Website.Controllers
             return View("Auctions", viewModel);
         }
 
-        public ActionResult Index(string query, long? category, int page=0, int size=10)
+        [GET("auctions")]
+        [GET("search")]
+        public ActionResult Index(string query, long? category, int page = 0, int size = 10)
         {
             var viewModel = new AuctionsViewModel {
                     Page = page,
@@ -79,6 +83,7 @@ namespace Website.Controllers
         }
 
         [Authorize]
+        [POST("auctions/{id}/bids")]
         public ActionResult Bid(int id, decimal amount)
         {
             var auction = _repository.Find<Auction>(id);
@@ -105,6 +110,7 @@ namespace Website.Controllers
             return RedirectToAction("Details", new {id});
         }
 
+        [GET("auctions/{id}")]
         public ActionResult Details(int id)
         {
             var auction = _repository.Find<Auction>(id);
@@ -117,16 +123,19 @@ namespace Website.Controllers
             return View("Details", viewModel);
         }
 
+        [GET("auctions/{id}/history")]
         public ActionResult History(int id)
         {
             return View("History");
         }
 
+        [GET("sellers/{id}")]
         public ActionResult Seller(string id)
         {
             return View("Seller");
         }
 
+        [GET("auctions/search/autocomplete")]
         public ActionResult Autocomplete(string query, long? category)
         {
             IEnumerable<Auction> auctions = _repository.Query<Auction>();
