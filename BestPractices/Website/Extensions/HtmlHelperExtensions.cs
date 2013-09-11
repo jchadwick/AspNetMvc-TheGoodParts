@@ -5,11 +5,17 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Common;
+using Website.Models;
 
 namespace Website.Extensions
 {
     public static class HtmlHelperExtensions
     {
+        public static IHtmlString AuctionLink(this HtmlHelper html, AuctionViewModel auction)
+        {
+            return html.ActionLink(auction.Title, "Details", "Auctions", new {auction.Id}, null);
+        }
+
         public static IHtmlString ConditionSelector<T>(this HtmlHelper<T> html, 
                 ItemCondition? condition = null, string name = "Condition",
                 string optionLabel = null, object htmlAttributes = null

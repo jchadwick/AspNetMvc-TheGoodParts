@@ -17,7 +17,7 @@
             </td>
             <td>
                 <p class="title">
-                    @Html.ActionLink(auction.Title, "Details", "Auctions", new { id = auction.Id }, null)
+                    @Html.AuctionLink(auction)
                 </p>
                 <span class="muted">Condition: @auction.Condition</span>
             </td>
