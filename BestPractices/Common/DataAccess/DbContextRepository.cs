@@ -7,7 +7,7 @@ namespace Common.DataAccess
     {
         private readonly DbContext _context;
 
-        public DbContextRepository(DataContext context)
+        public DbContextRepository(DbContext context)
         {
             _context = context;
         }
