@@ -171,7 +171,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Entities.cs" />
+    <Compile Include="Models\Auction.cs" />
+    <Compile Include="Models\Bid.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DataContext.cs" />
+    <Compile Include="Models\ItemCondition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ImageRepository.cs" />
   </ItemGroup>

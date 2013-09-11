@@ -11,8 +11,6 @@ namespace Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        public static readonly string AuctionImagesFolder = "~/Content/auction-images";
-
         private readonly IRepository _repository;
 
         public AuctionsController(IRepository repository)

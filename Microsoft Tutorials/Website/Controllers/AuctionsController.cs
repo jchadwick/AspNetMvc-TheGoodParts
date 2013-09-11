@@ -7,8 +7,6 @@ namespace Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        public static readonly string AuctionImagesFolder = "~/Content/auction-images";
-
         private DataContext db = new DataContext();
 
         public ActionResult ByCategory(string id)
