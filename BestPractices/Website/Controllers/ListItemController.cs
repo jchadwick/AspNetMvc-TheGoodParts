@@ -35,9 +35,7 @@ namespace Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                var auction = new Auction();
-
-                Mapper.DynamicMap(request, auction);
+                var auction = Mapper.DynamicMap<Auction>(request);
 
                 if (request.Image != null)
                 {
