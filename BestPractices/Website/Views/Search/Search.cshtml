@@ -1,0 +1,66 @@
+﻿@model AuctionsViewModel
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<h2 class="pull-left">Search Results</h2>
+
+<div class="pull-right input-prepend">
+    <label for="pageSize" class="add-on">Items per page: </label>
+    <select id="pageSize" class="input-mini form-inline" data-bind="value: pageSize, click: search">
+        <option value="5">5</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+    </select>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="alert alert-info" data-bind="visible: !hasResults() && hasSearchQuery()" style="display: none">
+    No results found for search query '<span data-bind="text: searchQuery"></span>'
+</div>
+
+<table id="auctions" class="table table-hover table-condensed" data-bind="visible: hasResults">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h3 data-bind="text: selectedCategory"></h3>
+            </th>
+            <th class="span2">Current Price</th>
+            <th class="span3">Ends In</th>
+        </tr>
+    </thead>
+
+    <tbody data-bind="foreach: auctions">
+
+        <tr class="auction" style="display: none" data-bind="visible: true">
+            <td class="span2">
+                <img class="img-polaroid" data-bind="attr: { src: ThumbnailUrl }" />
+            </td>
+            <td>
+                <p class="title">
+                    <a data-bind="text: Title, attr: { href: '/auctions/' + Id }"></a>
+                </p>
+                <span class="muted">Condition: <span data-bind="text: Condition"></span></span>
+            </td>
+            <td>
+                <span class="price" data-bind="text: CurrentPriceDisplay"></span>
+            </td>
+            <td>
+                <span class="ends-in" data-bind="text: EndsIn, css: { 'text-warning': EndsToday }, attr: { title: EndTime }"></span>
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var viewModel = new SearchViewModel();
+        viewModel.load(@Html.Raw(JsonConvert.SerializeObject(Model)));
+    ko.applyBindings(viewModel);
+    </script>
+}

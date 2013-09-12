@@ -42,7 +42,6 @@ namespace Website.Controllers
         }
 
         [GET("auctions")]
-        [GET("search")]
         public ActionResult Index(string query, long? category, int page = 0, int size = 10)
         {
             var viewModel = new AuctionsViewModel {
@@ -133,22 +132,6 @@ namespace Website.Controllers
         public ActionResult Seller(string id)
         {
             return View("Seller");
-        }
-
-        [GET("auctions/search/autocomplete")]
-        public ActionResult Autocomplete(string query, long? category)
-        {
-            IEnumerable<Auction> auctions = _repository.Query<Auction>();
-
-            if (category != null)
-                auctions = auctions.Where(x => x.CategoryId == category.Value);
-
-            var lowerQuery = query.ToLower();
-            var titles = 
-                auctions.Select(x => x.Title)
-                    .Where(x => x.ToLower().Contains(lowerQuery));
-
-            return Json(titles.ToArray(), JsonRequestBehavior.AllowGet);
         }
     }
 }

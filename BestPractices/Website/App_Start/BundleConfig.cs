@@ -15,7 +15,9 @@ namespace Website
             bundles.Add(new ScriptBundle("~/bundles/global").Include(
                         "~/Scripts/modernizr-*",
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/bootstrap*"
+                        "~/Scripts/bootstrap*",
+                        "~/Scripts/knockout*",
+                        "~/Scripts/search.js"
                     ));
 
             bundles.Add(new ScriptBundle("~/bundles/validation").Include(

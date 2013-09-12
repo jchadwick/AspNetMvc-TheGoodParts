@@ -1,9 +1,10 @@
 ﻿<div id="search" class="clearfix">
-    <form action="@Url.Action("Index", "Auctions")" method="GET" class="form-search">
+    <form action="@Url.Action("Search", "Search")" method="GET" class="form-search">
         <div class="input-append pull-right">
             <input name="query" type="text" value="@ViewBag.Query"
                    class="search-query" placeholder="Search" 
                    autocomplete="off" data-provide="typeahead"
+                   data-bind="value: searchQuery"
                  />
 
             @(Html.CategorySelector(ViewBag.SelectedCategory as long?, 
@@ -11,19 +12,7 @@
                                     optionLabel: "All Categories"
                   ))
 
-            <input class="btn" type="submit" value="Search" />
+            <input class="btn" type="submit" value="Search" data-bind="click: search" />
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-    $('#search .search-query').data('source',
-        function(query, callback) {
-            var category = $('#search [name=category]').val();
-            $.getJSON(
-                '@Url.Action("Autocomplete", "Auctions")',
-                { query: query, category: category },
-                callback
-            );
-        });
-</script>

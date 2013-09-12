@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>@(string.IsNullOrWhiteSpace(ViewBag.Title) ? "" : ViewBag.Title + " |") MVC Auctions</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/global")
 </head>
 <body>
     @Html.Partial("_Navigation")
@@ -34,6 +33,7 @@
 
     </div>
 
+    @Scripts.Render("~/bundles/global")
     @RenderSection("scripts", required: false)
 </body>
 </html>

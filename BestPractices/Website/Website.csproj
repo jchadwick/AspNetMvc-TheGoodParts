@@ -159,6 +159,7 @@
     <Compile Include="App_Start\MunqMvc3Startup.cs" />
     <Compile Include="Controllers\ListItemController.cs" />
     <Compile Include="Controllers\CategorySelectorController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\TempDataExtensions.cs" />
     <Compile Include="Filters\CategoriesActionFilter.cs" />
@@ -180,25 +181,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Auctions.css">
-      <DependentUpon>Auctions.scss</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Auctions.scss" />
-    <None Include="Content\Details.scss" />
+    <None Include="Content\Details.less" />
     <Content Include="Content\Details.css">
-      <DependentUpon>Details.scss</DependentUpon>
+      <DependentUpon>Details.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Details.min.css">
+      <DependentUpon>Details.less</DependentUpon>
     </Content>
     <Content Include="Content\Featured.css">
-      <DependentUpon>Featured.scss</DependentUpon>
+      <DependentUpon>Featured.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Featured.min.css">
+      <DependentUpon>Featured.less</DependentUpon>
     </Content>
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Featured.scss" />
+    <None Include="Content\Featured.less" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -214,6 +217,12 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\search.js">
+      <DependentUpon>search.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\search.min.js">
+      <DependentUpon>search.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -229,7 +238,6 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\_Featured.cshtml" />
-    <Content Include="Views\Auctions\Auctions.cshtml" />
     <Content Include="Views\Auctions\Details.cshtml" />
     <Content Include="Views\Auctions\History.cshtml" />
     <Content Include="Views\Auctions\Seller.cshtml" />
@@ -241,6 +249,9 @@
     <Content Include="Views\Shared\_SearchBar.cshtml" />
     <Content Include="Views\Shared\_AlertPane.cshtml" />
     <Content Include="Views\CategorySelector\CategorySelector.cshtml" />
+    <Content Include="Scripts\search.coffee" />
+    <Content Include="Views\Auctions\Auctions.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
