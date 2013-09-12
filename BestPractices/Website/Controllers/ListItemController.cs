@@ -13,9 +13,9 @@ namespace Website.Controllers
     {
         public static readonly string AuctionImagesFolder = "~/Content/auction-images";
 
-        private readonly IRepository _repository;
+        private readonly IAuctionRepository _repository;
 
-        public ListItemController(IRepository repository)
+        public ListItemController(IAuctionRepository repository)
         {
             _repository = repository;
         }
@@ -23,7 +23,7 @@ namespace Website.Controllers
         [HttpGet]
         [Authorize]
         [GET("sell")]
-        public ActionResult Index()
+        public ActionResult ListItem()
         {
             return View("ListItem", new ListItemRequest());
         }
@@ -31,7 +31,7 @@ namespace Website.Controllers
         [HttpPost]
         [Authorize]
         [POST("sell")]
-        public ActionResult Index(ListItemRequest request)
+        public ActionResult ListItem(ListItemRequest request)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,8 @@ namespace Website.Controllers
             }
 
             TempData.ErrorMessage("Error listing item - please make sure that you've filled in everything correctly! ");
-            return Index();
+            
+            return View("ListItem", request);
         }
     }
 }

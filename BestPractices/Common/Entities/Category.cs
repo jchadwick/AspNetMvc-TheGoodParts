@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common
@@ -21,5 +22,8 @@ namespace Common
         [DataType(DataType.Text)]
         [StringLength(maximumLength: 30, MinimumLength = 3)]
         public string Name { get; set; }
+
+
+        public virtual ICollection<Auction> Auctions { get; set; }
     }
 }

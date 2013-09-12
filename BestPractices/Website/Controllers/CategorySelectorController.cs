@@ -1,15 +1,14 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using Common;
 using Common.DataAccess;
 
 namespace Website.Controllers
 {
     public class CategorySelectorController : Controller
     {
-        private readonly IRepository _repository;
+        private readonly ICategoryRepository _repository;
 
-        public CategorySelectorController(IRepository repository)
+        public CategorySelectorController(ICategoryRepository repository)
         {
             _repository = repository;
         }
@@ -20,7 +19,7 @@ namespace Website.Controllers
                 string optionLabel = null, object htmlAttributes = null
             )
         {
-            var categories = _repository.Query<Category>().ToArray();
+            var categories = _repository.GetAvailableCategories().ToArray();
             var selections = new SelectList(categories, "Id", "Name", selectedCategory);
 
             ViewBag.Name = name ?? "CategoryId";

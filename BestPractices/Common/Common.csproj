@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\DbContextRepository.cs" />
-    <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DataAccess\AuctionRepository.cs" />
+    <Compile Include="DataAccess\CategoryRepository.cs" />
     <Compile Include="Entities\Auction.cs" />
     <Compile Include="DataAccess\DataContext.cs" />
     <Compile Include="Entities\Bid.cs" />

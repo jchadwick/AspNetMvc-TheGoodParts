@@ -13,8 +13,10 @@ namespace Website.App_Start {
 			DependencyResolver.SetResolver(new MunqDependencyResolver());
 
 			 var ioc = MunqDependencyResolver.Container;
+
 			 ioc.Register<DbContext, DataContext>().AsRequestSingleton();
-			 ioc.Register<IRepository, DbContextRepository>().AsRequestSingleton();
+             ioc.Register<IAuctionRepository, AuctionRepository>().AsRequestSingleton();
+             ioc.Register<ICategoryRepository, CategoryRepository>().AsRequestSingleton();
 		}
 	}
 }

@@ -22,6 +22,7 @@ namespace Common
             set { _categoryId = value; }
         }
         private long? _categoryId;
+
         public virtual Category Category { get; set; }
 
         [Required]
