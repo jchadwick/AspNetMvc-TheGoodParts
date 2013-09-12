@@ -1,5 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+
+using AttributeRouting.Web.Mvc;
+
 using Common.DataAccess;
 
 namespace Website.Controllers
@@ -13,6 +16,8 @@ namespace Website.Controllers
             _repository = repository;
         }
 
+        // Still needs a route, even though it's impossible to navigate to "externally" -- weird, huh?
+        [Route("CategorySelector")]
         [ChildActionOnly]
         public ActionResult CategorySelector(
                 long? selectedCategory = null, string name = null,
@@ -26,7 +31,7 @@ namespace Website.Controllers
             ViewBag.OptionLabel = optionLabel;
             ViewBag.HtmlAttributes = htmlAttributes;
 
-            return PartialView("CategorySelector", selections);
+            return PartialView("_CategorySelector", selections);
         }
     }
 }

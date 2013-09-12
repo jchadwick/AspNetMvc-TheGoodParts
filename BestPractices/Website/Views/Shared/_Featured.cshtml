@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AuctionViewModel>
+
+@functions
+{
+    IEnumerable<IEnumerable<AuctionViewModel>> GroupedAuctions(IEnumerable<AuctionViewModel> auctions, int groupSize)
+    {
+        var skip = 0;
+
+        while(skip < auctions.Count())
+        {
+            var group = auctions.Skip(skip).Take(groupSize);
+            skip += groupSize;
+            yield return group;
+        }
+    }
+}
+
+<div class="featured">
+<h2 class="center">Featured Auctions</h2>
+<div id="featured-auctions" class="carousel slide">
+    <div class="carousel-inner">
+        @{ var first = true; }
+
+        @foreach (var auctions in GroupedAuctions(Model, 4))
+        {
+            <div class="item @(first ? "active": "")">
+                <ul class="unstyled">
+                @foreach (var auction in auctions)
+                {
+                    <li class="auction pull-left" data-id="@auction.Id">
+                        <a href="@Url.Action("Details", "Auctions", new { id = auction.Id })">
+                        <img class="img-polaroid" src="@auction.ThumbnailUrl" />
+                        <div class="title">@auction.Title</div>
+                        <div><span class="price label label-success">@auction.CurrentPriceDisplay</span></div>
+                        </a>
+                    </li>
+                }
+                </ul>
+            </div>
+            
+            first = false;
+        }
+    </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#featured-auctions" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#featured-auctions" data-slide="next">&rsaquo;</a>
+</div>
+</div>

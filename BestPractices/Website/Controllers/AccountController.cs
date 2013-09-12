@@ -41,7 +41,7 @@ namespace Website.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Homepage");
                 }
             }
 
@@ -56,7 +56,7 @@ namespace Website.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Homepage");
         }
 
         [AllowAnonymous]
@@ -77,7 +77,7 @@ namespace Website.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Homepage");
                 }
                 catch (MembershipCreateUserException e)
                 {

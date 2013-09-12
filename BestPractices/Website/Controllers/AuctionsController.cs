@@ -63,11 +63,5 @@ namespace Website.Controllers
         {
             return View("History");
         }
-
-        [GET("sellers/{id}")]
-        public ActionResult Seller(string id)
-        {
-            return View("Seller");
-        }
     }
 }
