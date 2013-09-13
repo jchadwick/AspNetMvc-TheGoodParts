@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Website
@@ -13,6 +9,21 @@ namespace Website
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // The only way (the easiest, at least) to control routing -- custom routes:
+            routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new { controller = "Account", action = "Login" }
+            );
+
+            routes.MapRoute(
+                name: "Auction",
+                url: "auctions/{id}",
+                defaults: new { controller = "Auctions", action = "Details" }
+            );
+
+
+            // The default route is still here to continue to apply the standard convention
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

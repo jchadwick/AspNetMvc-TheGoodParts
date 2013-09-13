@@ -1,0 +1,99 @@
+﻿@using Common
+@model Auction
+
+@{
+    ViewBag.Title = "List Item for Sale";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!-- ZOMG: Security Risk!! -->
+    @Html.Hidden("SellerUsername", User.Identity.Name)
+    
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="editor-label">
+            @Html.Label("Category")
+        </div>
+        <div class="editor-field">
+            @{
+                var selectList = new SelectList(ViewBag.Categories as IEnumerable<Category>, "Id", "Name");
+            }
+            @Html.DropDownList("CategoryId", selectList)
+            @Html.ValidationMessageFor(model => model.CategoryId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Condition)
+        </div>
+        <div class="editor-field">
+            <select name="Condition">
+                @foreach(var condition in Enum.GetNames(typeof(ItemCondition)))
+                {
+                <option>@condition</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Condition)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartingPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartingPrice)
+            @Html.ValidationMessageFor(model => model.StartingPrice)
+        </div>
+
+        <div class="editor-label">
+            <label for="Duration">Duration</label>
+        </div>
+        <div class="editor-field">
+            <!-- Security risk #2! -->
+            @Html.Hidden("StartTime", DateTime.Now)
+
+            <!-- NOTE: Not actually part of the Auction object! -->
+            <select name="Duration">
+                <option>3</option>
+                <option>5</option>
+                <option>7</option>
+                <option>10</option>
+            </select> days
+            @Html.ValidationMessage("Duration")
+        </div>
+
+        <div class="editor-label">
+            <label for="Image">Image</label>
+        </div>
+        <div class="editor-field">
+            <input name="image" type="file" />
+        </div>
+
+    </fieldset>
+    
+    <div>
+        <input class="btn btn-primary" type="submit" value="List Item" />
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

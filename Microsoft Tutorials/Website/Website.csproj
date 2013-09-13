@@ -165,7 +165,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ListItemController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -194,14 +193,17 @@
     <Content Include="Content\auction-images\nook_thumb.jpg" />
     <Content Include="Content\auction-images\velvet-elvis.jpg" />
     <Content Include="Content\auction-images\velvet-elvis_thumb.jpg" />
-    <Content Include="Content\Auctions.css">
-      <DependentUpon>Auctions.scss</DependentUpon>
-    </Content>
     <Content Include="Content\Details.css">
-      <DependentUpon>Details.scss</DependentUpon>
+      <DependentUpon>Details.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Details.min.css">
+      <DependentUpon>Details.less</DependentUpon>
     </Content>
     <Content Include="Content\Featured.css">
-      <DependentUpon>Featured.scss</DependentUpon>
+      <DependentUpon>Featured.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Featured.min.css">
+      <DependentUpon>Featured.less</DependentUpon>
     </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -259,9 +261,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Auctions.scss" />
-    <Content Include="Content\Details.scss" />
-    <Content Include="Content\Featured.scss" />
+    <None Include="Content\Details.less" />
+    <None Include="Content\Featured.less" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -319,7 +320,7 @@
     <Content Include="Views\Auctions\Seller.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\_Featured.cshtml" />
-    <Content Include="Views\ListItem\Index.cshtml">
+    <Content Include="Views\Auctions\ListItem.cshtml">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
