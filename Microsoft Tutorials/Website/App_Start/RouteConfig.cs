@@ -22,6 +22,12 @@ namespace Website
                 defaults: new { controller = "Auctions", action = "Details" }
             );
 
+            routes.MapRoute(
+                name: "Autocomplete",
+                url: "autocomplete",
+                defaults: new { controller = "Auctions", action = "Autocomplete" }
+            );
+
 
             // The default route is still here to continue to apply the standard convention
             routes.MapRoute(

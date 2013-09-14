@@ -1,0 +1,45 @@
+﻿@using Common
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="@Url.Content("~/")">MVC Auctions</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                @foreach(Category category in ViewBag.Categories)
+                {
+                    <li>@Html.ActionLink(category.Name, "ByCategory", "Auctions", new { id = category.Key }, null)</li>
+                }
+                </ul>
+            </div>
+            <div class="pull-right">
+                <ul class="nav">
+                    <li>
+                        <a href="@Url.Action("ListItem", "Auctions")">
+                            <i class="icon-share"></i>
+                            Sell item
+                        </a>
+                    </li>
+                    <li>
+                    @if(!User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Sign in", "Login", "Account")
+                    }
+                    else
+                    {
+                        <div style="margin: 10px 0 10px 10px;">
+                        <i class=" icon-user"></i> 
+                        @User.Identity.Name
+                        @Html.ActionLink("[logout]", "LogOff", "Account")
+                        </div>
+                    }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

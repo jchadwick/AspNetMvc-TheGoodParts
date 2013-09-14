@@ -1,11 +1,10 @@
-﻿@model Website.Models.RegisterModel
+﻿@model RegisterModel
 @{
     ViewBag.Title = "Register";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
 </hgroup>
 
 @using (Html.BeginForm()) {
@@ -13,22 +12,31 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
+        <legend>Create a New Account</legend>
+        <ol class="unstyled form-horizontal">
+            <li class="control-group">
+                @Html.LabelFor(m => m.UserName, new { @class ="control-label"})
+                <p class="controls">
                 @Html.TextBoxFor(m => m.UserName)
+                </p>
             </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
+            <li class="control-group">
+                @Html.LabelFor(m => m.Password, new { @class ="control-label"})
+                <p class="controls">
                 @Html.PasswordFor(m => m.Password)
+                </p>
             </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
+            <li class="control-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class ="control-label"})
+                <p class="controls">
+                    @Html.PasswordFor(m => m.ConfirmPassword)
+                </p>
+                <p class="controls">
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Register" />
+                </p>
             </li>
         </ol>
-        <input type="submit" value="Register" />
     </fieldset>
 }
 
