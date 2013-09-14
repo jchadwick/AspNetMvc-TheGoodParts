@@ -19,7 +19,8 @@ namespace Website
             routes.MapRoute(
                 name: "Auction",
                 url: "auctions/{id}",
-                defaults: new { controller = "Auctions", action = "Details" }
+                defaults: new { controller = "Auctions", action = "Details" },
+                constraints: new { id = @"\d" }
             );
 
             routes.MapRoute(
