@@ -1,8 +1,8 @@
-﻿@model IEnumerable<AuctionViewModel>
+﻿@model IEnumerable<Auction>
 
 @functions
 {
-    IEnumerable<IEnumerable<AuctionViewModel>> GroupedAuctions(IEnumerable<AuctionViewModel> auctions, int groupSize)
+    IEnumerable<IEnumerable<Auction>> GroupedAuctions(IEnumerable<Auction> auctions, int groupSize)
     {
         var skip = 0;
 
@@ -31,7 +31,7 @@
                         <a href="@Url.Action("Details", "Auctions", new { id = auction.Id })">
                         <img class="img-polaroid" src="@auction.ThumbnailUrl" />
                         <div class="title">@auction.Title</div>
-                        <div><span class="price label label-success">@auction.CurrentPriceDisplay</span></div>
+                        <div><span class="price label label-success">@((auction.CurrentPrice ?? auction.StartingPrice).ToString("c"))</span></div>
                         </a>
                     </li>
                 }
