@@ -11,10 +11,10 @@
 
     @foreach (var auction in Model)
     {
-        var endTime = auction.EndTime - DateTime.Now;
-        var endsToday = endTime < TimeSpan.FromDays(1);
+        var timeRemaining = auction.EndTime - DateTime.Now;
+        var endsToday = timeRemaining < TimeSpan.FromDays(1);
         var endTimeDisplay = string.Format("{0} days, {1} hours, {2} mins",
-                                           endTime.Days, endTime.Hours, endTime.Minutes);
+                                           timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes);
         var currentPriceDisplay = (auction.CurrentPrice ?? auction.StartingPrice).ToString("c");
 
         <tr class="auction" data-id="@auction.Id">
