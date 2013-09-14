@@ -14,8 +14,8 @@ namespace Website.App_Start
         }
 
         class DataContextInitializer
-//            : DropCreateDatabaseIfModelChanges<DataContext>
-            : DropCreateDatabaseAlways<DataContext>
+            : DropCreateDatabaseIfModelChanges<DataContext>
+//            : DropCreateDatabaseAlways<DataContext>
         {
             private readonly UsersContext _usersContext;
             private readonly Random _random;
