@@ -16,6 +16,10 @@ Agenda
 		AuctionsController:  43
 	* Loosely-typed ViewData/ViewBag usage
 		AuctionsController:  39
+	* ...some of it to support shared content (e.g. navigation)
+		_Navigation.cshtml: 13
+	* Tons of logic in the views
+		Auctions.cshtml: 12
 
 2. The drawbacks and frustrations to following Microsoft's recommendations:
 	* Calling View() can lead to bugs
