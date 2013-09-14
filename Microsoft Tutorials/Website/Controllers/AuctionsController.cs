@@ -9,8 +9,10 @@ namespace Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        private DataContext db = new DataContext();
         private const string AuctionImagesFolder = "~/Content/auction-images";
+
+        private readonly DataContext db = new DataContext();
+
 
         public ActionResult ByCategory(string id)
         {
@@ -19,7 +21,7 @@ namespace Website.Controllers
             ViewBag.Categories = categories;
 
             var category = categories.FirstOrDefault(x => x.Key == id);
-            
+
             if (category == null)
                 return HttpNotFound();
 
@@ -32,7 +34,7 @@ namespace Website.Controllers
             return View("Auctions", auctions.ToArray());
         }
 
-        public ActionResult Index(string query, long? category, int page=0, int size=10)
+        public ActionResult Index(string query, long? category, int page = 0, int size = 10)
         {
             // Set the Categories for the navigation
             var categories = db.Categories;
@@ -40,7 +42,7 @@ namespace Website.Controllers
 
             IQueryable<Auction> auctions = db.Auctions;
 
-            if(!string.IsNullOrWhiteSpace(query))
+            if (!string.IsNullOrWhiteSpace(query))
             {
                 auctions = auctions.Where(x =>
                            x.Title.ToLower().IndexOf(query.ToLower()) >= 0
@@ -54,7 +56,7 @@ namespace Website.Controllers
             if (category != null)
             {
                 var cat = categories.Find(category);
-                if(cat != null)
+                if (cat != null)
                 {
                     auctions = auctions.Where(x => x.CategoryId == cat.Id);
 
@@ -63,7 +65,7 @@ namespace Website.Controllers
                 }
             }
 
-            auctions = auctions.OrderBy(x => x.EndTime).Skip(page*size).Take(size);
+            auctions = auctions.OrderBy(x => x.EndTime).Skip(page * size).Take(size);
 
             ViewBag.SearchQuery = query;
 
@@ -78,9 +80,9 @@ namespace Website.Controllers
             if (auction == null)
                 return HttpNotFound("Auction not found");
 
-            if(auction.CurrentPrice >= amount)
+            if (auction.CurrentPrice >= amount)
             {
-                TempData["ErrorMessage"] = 
+                TempData["ErrorMessage"] =
                     string.Format(
                         "Your bid of {0:c} isn't higher than the current bid ({1:c}). Try again!",
                         amount, auction.CurrentPrice);
@@ -93,10 +95,10 @@ namespace Website.Controllers
 
             TempData["SuccessMessage"] =
                 string.Format(
-                    "Congratulations - you're the highest bidder at {0:c}!", 
+                    "Congratulations - you're the highest bidder at {0:c}!",
                     auction.CurrentPrice);
 
-            return RedirectToAction("Details", new {id});
+            return RedirectToAction("Details", new { id });
         }
 
         public ActionResult Details(int id)
@@ -131,14 +133,14 @@ namespace Website.Controllers
                 auctions = auctions.Where(x => x.CategoryId == category.Value);
 
             var lowerQuery = query.ToLower();
-            var titles = 
+            var titles =
                 auctions.Select(x => x.Title)
                     .Where(x => x.ToLower().Contains(lowerQuery));
 
             return Json(titles.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
-                [HttpGet]
+        [HttpGet]
         [Authorize]
         public ActionResult ListItem()
         {
@@ -161,10 +163,13 @@ namespace Website.Controllers
             if (ModelState.ContainsKey("SellerUsername"))
                 ModelState.Remove("SellerUsername");
 
+
             // And we never set the EndTime because we used "duration" instead...
             if (ModelState.ContainsKey("EndTime"))
                 ModelState.Remove("EndTime");
 
+
+            // Now validate the duration manually (because it's not part of the model)
             if (duration < 3)
             {
                 ModelState.AddModelError("Duration", "Auction must last at least 3 days");
@@ -173,6 +178,7 @@ namespace Website.Controllers
             {
                 auction.EndTime = auction.StartTime.AddDays(duration);
             }
+
 
             if (ModelState.IsValid)
             {
