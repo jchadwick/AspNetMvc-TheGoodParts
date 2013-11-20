@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Common;
 using Website.Models;
+using Website.Models.Auctions;
 
 namespace Website.Extensions
 {

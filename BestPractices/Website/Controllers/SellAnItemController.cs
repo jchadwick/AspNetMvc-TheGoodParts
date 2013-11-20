@@ -6,6 +6,7 @@ using Common.DataAccess;
 using Common.Util;
 using Website.Extensions;
 using Website.Models;
+using Website.Models.Auctions;
 
 namespace Website.Controllers
 {

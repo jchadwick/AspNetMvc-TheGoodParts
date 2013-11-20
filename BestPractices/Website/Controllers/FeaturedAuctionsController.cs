@@ -8,6 +8,7 @@ using AutoMapper;
 using Common.DataAccess;
 
 using Website.Models;
+using Website.Models.Auctions;
 
 namespace Website.Controllers
 {
