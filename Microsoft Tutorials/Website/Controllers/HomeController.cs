@@ -18,5 +18,23 @@ namespace Website.Controllers
 
             return View("Homepage", featuredAuctions);
         }
+
+        public ActionResult Demo()
+        {
+            // Set the Categories for the navigation
+            var categories = db.Categories;
+            ViewBag.Categories = categories;
+
+            // Return implicitly-named view.
+            // Works fine when Demo() is called directly...
+            // but not when called from another action!
+            return View();
+        }
+
+        public ActionResult AltDemo()
+        {
+            // BOOM!  "The view 'AltDemo' or its master was not found"!
+            return Demo();
+        }
     }
 }
