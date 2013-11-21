@@ -19,7 +19,7 @@ namespace Website.Controllers
         }
 
         [Authorize]
-        [POST("auctions/{id}/bids")]
+        [HttpPost, Route("auctions/{id}/bids")]
         public ActionResult Bid(int id, decimal amount)
         {
             var auction = _repository.Find(id);
@@ -46,7 +46,7 @@ namespace Website.Controllers
             return RedirectToAction("Details", new {id});
         }
 
-        [GET("auctions/{id}")]
+        [Route("auctions/{id}")]
         public ActionResult Details(int id)
         {
             var auction = _repository.Find(id);
@@ -59,7 +59,7 @@ namespace Website.Controllers
             return View("Details", viewModel);
         }
 
-        [GET("auctions/{id}/history")]
+        [Route("auctions/{id}/history")]
         public ActionResult History(int id)
         {
             return View("History");

@@ -18,14 +18,14 @@ namespace Website.Controllers
             _repository = repository;
         }
 
-        [GET("autocomplete")]
+        [Route("autocomplete")]
         public ActionResult Autocomplete(string query, long? category)
         {
             var suggestions = _repository.Autocomplete(query, category);
             return Json(suggestions.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
-        [GET("categories/{categoryKey}")]
+        [Route("categories/{categoryKey}")]
         public ActionResult ByCategory(string categoryKey)
         {
             Category category;

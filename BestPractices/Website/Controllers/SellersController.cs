@@ -6,7 +6,7 @@ namespace Website.Controllers
 {
     public class SellersController : Controller
     {
-        [GET("sellers/{id}")]
+        [Route("sellers/{id}")]
         public ActionResult Seller(string id)
         {
             return View("Seller");

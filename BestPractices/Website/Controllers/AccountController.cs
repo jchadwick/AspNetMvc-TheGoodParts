@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Security;
+using AttributeRouting.Web.Mvc;
 using Common;
 using WebMatrix.WebData;
 
@@ -22,13 +23,14 @@ namespace Website.Controllers
     public class AccountController : Controller
     {
         [AllowAnonymous]
+        [HttpGet, Route("login")]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, Route("login")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)

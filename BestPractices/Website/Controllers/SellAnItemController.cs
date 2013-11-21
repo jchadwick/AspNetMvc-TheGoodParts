@@ -23,14 +23,14 @@ namespace Website.Controllers
         }
 
         [HttpGet]
-        [GET("sell")]
+        [Route("sell")]
         public ActionResult Sell()
         {
             return View("Sell", new ListItemRequest());
         }
 
         [HttpPost]
-        [POST("sell")]
+        [Route("sell")]
         public ActionResult Sell(ListItemRequest request)
         {
             if (ModelState.IsValid)

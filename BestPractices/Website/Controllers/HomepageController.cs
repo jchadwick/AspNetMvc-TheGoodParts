@@ -6,7 +6,7 @@ namespace Website.Controllers
 {
     public class HomepageController : Controller
     {
-        [GET("")]
+        [Route("")]
         public ActionResult Homepage()
         {
             return View("Homepage");
