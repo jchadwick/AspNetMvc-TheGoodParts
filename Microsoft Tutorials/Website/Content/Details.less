@@ -1,8 +1,13 @@
-﻿#auction-info {
-    margin-bottom: 20px;
+﻿// Variables
+@whiteBorder: 1px solid #ccc;
+@someMultiplier: 2;
+
+#auction-info {
+    // Operation
+    margin-bottom: (10*@someMultiplier)px;
 
     #auction-title {
-        border-bottom: 1px solid #ccc;
+        border-bottom: @whiteBorder;
     }
 
     #images {

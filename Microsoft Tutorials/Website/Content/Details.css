@@ -1,37 +1,47 @@
 ﻿#auction-info {
-  margin-bottom: 20px;
+    margin-bottom: 20 px;
 }
+
 #auction-info #auction-title {
-  border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #cccccc;
 }
+
 #auction-info #images {
-  padding-top: 20px;
+    padding-top: 20px;
 }
+
 #auction-info #auction-details p {
-  margin: 0;
+    margin: 0;
 }
+
 #auction-info #auction-details [class*="span"] {
-  min-height: 24px;
+    min-height: 24px;
 }
+
 #auction-info #auction-details label {
-  text-align: right;
-  padding-right: 5px;
-  display: inline;
+    text-align: right;
+    padding-right: 5px;
+    display: inline;
 }
+
 #auction-info .auction-actions {
-  float: right;
+    float: right;
 }
+
 #auction-info .actions {
-  list-style: none;
-  margin: 0 10px;
+    list-style: none;
+    margin: 0 10px;
 }
+
 #auction-info .actions .action {
-  line-height: 30px;
+    line-height: 30px;
 }
+
 #auction-info .nav-tabs {
-  padding: 0;
-  list-style: none;
+    padding: 0;
+    list-style: none;
 }
+
 #auction-info .nav-tabs li {
-  list-style: none;
+    list-style: none;
 }
