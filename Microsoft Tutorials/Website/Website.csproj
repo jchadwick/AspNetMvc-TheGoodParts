@@ -271,7 +271,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\_CategorySelector.cshtml" />
-    <Content Include="Views\Shared\_Featured.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_SearchBar.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
