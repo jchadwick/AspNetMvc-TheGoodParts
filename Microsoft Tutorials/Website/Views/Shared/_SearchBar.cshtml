@@ -7,17 +7,6 @@
                    autocomplete="off" data-provide="typeahead"
                    data-bind="value: searchQuery"
                  />
-            
-            @{
-                var categorySelections = new SelectList(
-                        (IEnumerable) ViewBag.Categories,
-                        "Id", "Name",
-                        ViewBag.SelectedCategory as long?
-                    );
-            }
-            @Html.DropDownList("category", categorySelections, "All Categories", new  { @class="span2" })
-            
-
             <input class="btn" type="submit" value="Search" data-bind="click: search" />
         </div>
     </form>
