@@ -43,7 +43,7 @@ namespace Website.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Homepage");
+                    return DefaultAction();
                 }
             }
 
@@ -58,7 +58,7 @@ namespace Website.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Homepage");
+            return DefaultAction();
         }
 
         [AllowAnonymous]
@@ -79,7 +79,7 @@ namespace Website.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Homepage");
+                    return DefaultAction();
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -93,6 +93,11 @@ namespace Website.Controllers
 
 
         #region Helpers
+
+        private ActionResult DefaultAction()
+        {
+            return RedirectToAction("Homepage", "Homepage");
+        }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
